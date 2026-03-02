@@ -53,9 +53,8 @@ export const buildCommands = async (
   cli: CommanderCommand<
     [],
     {
-      api_base_url: string;
-      token?: string;
-      manuscript_uuid?: string;
+      api_base_url?: string | true;
+      token?: string | true;
     },
     // biome-ignore lint/complexity/noBannedTypes: ignore type error
     {}
@@ -65,9 +64,13 @@ export const buildCommands = async (
   const { api_base_url, token } = cli.opts();
 
   const apis = createApis({
-    baseUrl: api_base_url,
+    baseUrl:
+      typeof api_base_url === "string"
+        ? api_base_url
+        : (process.env["NETA_API_BASE_URL"] ?? "https://api.talesofai.cn"),
     headers: {
-      "x-token": token,
+      "x-token":
+        typeof token === "string" ? token : (process.env["NETA_TOKEN"] ?? ""),
       "x-platform": "nieta-app/web",
     },
   });
@@ -162,7 +165,7 @@ export const buildCommands = async (
         // @ts-expect-error -- ignore type error
         const result = await cmd
           // @ts-expect-error -- ignore type error
-          .execute(args, {
+          .execute(cmd.inputSchema.parse(args), {
             apis,
             user,
             log: IS_DEV

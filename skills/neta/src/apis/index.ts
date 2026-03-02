@@ -3,6 +3,7 @@ import { handleAxiosError } from "../utils/errors.ts";
 import { createActivityApis, type SelectedCollection } from "./activity.ts";
 import { createArtifactApis } from "./artifact.ts";
 import { createAudioApis } from "./audio.ts";
+import { createCollectionApis } from "./collection.ts";
 import { createConfigApis } from "./config.ts";
 import { createGptApis } from "./gpt.ts";
 import {
@@ -10,7 +11,6 @@ import {
   type HashtagInfo,
   type LoreEntry,
 } from "./hashtag.ts";
-
 import { createPromptApis } from "./prompt.ts";
 import { createTaskApis } from "./task.ts";
 import { createTcpApis } from "./tcp.ts";
@@ -49,6 +49,7 @@ export const createApis = (option: {
   const task = createTaskApis(client);
   const config = createConfigApis(client);
   const user = createUserApis(client);
+  const collection = createCollectionApis(client);
 
   return {
     tcp,
@@ -62,6 +63,7 @@ export const createApis = (option: {
     task,
     config,
     user,
+    collection,
   };
 };
 

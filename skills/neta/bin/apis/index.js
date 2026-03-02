@@ -3,6 +3,7 @@ import { handleAxiosError } from "../utils/errors.js";
 import { createActivityApis } from "./activity.js";
 import { createArtifactApis } from "./artifact.js";
 import { createAudioApis } from "./audio.js";
+import { createCollectionApis } from "./collection.js";
 import { createConfigApis } from "./config.js";
 import { createGptApis } from "./gpt.js";
 import { createHashtagApis, } from "./hashtag.js";
@@ -34,6 +35,7 @@ export const createApis = (option) => {
     const task = createTaskApis(client);
     const config = createConfigApis(client);
     const user = createUserApis(client);
+    const collection = createCollectionApis(client);
     return {
         tcp,
         prompt,
@@ -46,5 +48,6 @@ export const createApis = (option) => {
         task,
         config,
         user,
+        collection,
     };
 };

@@ -505,7 +505,10 @@ export type LLMMessage = {
 
 export interface ArtifactDetail {
   uuid: string;
+  url: string | null;
   modality: Modality;
   status: TaskStatus;
   input: MakeImageRequest | MakeVideoRequest | null;
+  image_detail?: { width: number; height: number };
+  video_detail?: { width: number; height: number };
 }

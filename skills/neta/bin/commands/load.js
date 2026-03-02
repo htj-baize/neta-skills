@@ -37,9 +37,11 @@ const logger = console;
 export const buildCommands = async (cli, commands) => {
     const { api_base_url, token } = cli.opts();
     const apis = createApis({
-        baseUrl: api_base_url,
+        baseUrl: typeof api_base_url === "string"
+            ? api_base_url
+            : (process.env["NETA_API_BASE_URL"] ?? "https://api.talesofai.cn"),
         headers: {
-            "x-token": token,
+            "x-token": typeof token === "string" ? token : (process.env["NETA_TOKEN"] ?? ""),
             "x-platform": "nieta-app/web",
         },
     });
@@ -109,7 +111,7 @@ export const buildCommands = async (cli, commands) => {
                 // @ts-expect-error -- ignore type error
                 const result = await cmd
                     // @ts-expect-error -- ignore type error
-                    .execute(args, {
+                    .execute(cmd.inputSchema.parse(args), {
                     apis,
                     user,
                     log: IS_DEV

@@ -1,4 +1,7 @@
 export const createHashtagApis = (client) => {
+    const createHashtag = (name, fromHashtag) => client
+        .post("/v1/hashtag/", { name, base_hashtag: fromHashtag })
+        .then((res) => res.data);
     const fetchHashtag = async (hashtag, config) => {
         const url = `/v1/hashtag/hashtag_info/${encodeURIComponent(hashtag)}`;
         return client.get(url, config).then((res) => res.data);
@@ -13,6 +16,7 @@ export const createHashtagApis = (client) => {
             .then((res) => res.data);
     };
     return {
+        createHashtag,
         fetchHashtag,
         fetchCharactersByHashtag,
     };

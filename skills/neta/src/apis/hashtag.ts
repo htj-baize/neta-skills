@@ -9,6 +9,12 @@ export type LoreEntry = {
   [key: string]: unknown;
 };
 
+export interface Hashtag {
+  uuid: string;
+  name: string;
+  creator: unknown;
+}
+
 export type HashtagInfo = {
   name: string;
   lore: LoreEntry[];
@@ -79,6 +85,11 @@ export type FetchCharactersByHashtagResponse = {
 };
 
 export const createHashtagApis = (client: AxiosInstance) => {
+  const createHashtag = (name: string, fromHashtag?: string) =>
+    client
+      .post<Hashtag>("/v1/hashtag/", { name, base_hashtag: fromHashtag })
+      .then((res) => res.data);
+
   const fetchHashtag = async (
     hashtag: string,
     config?: InternalAxiosRequestConfig,
@@ -107,6 +118,7 @@ export const createHashtagApis = (client: AxiosInstance) => {
   };
 
   return {
+    createHashtag,
     fetchHashtag,
     fetchCharactersByHashtag,
   };

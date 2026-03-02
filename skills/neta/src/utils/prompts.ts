@@ -3,7 +3,7 @@ interface CharacteVtoken {
   name: string;
   uuid: string;
   weight: number;
-  value: unknown;
+  value: string;
 }
 
 interface ElementumVtoken {
@@ -11,7 +11,7 @@ interface ElementumVtoken {
   name: string;
   uuid: string;
   weight: number;
-  value: unknown;
+  value: string;
 }
 
 export const mapTCP2Tag = (
@@ -147,7 +147,7 @@ const parseSeparatedListOfString = <TChar>(
 export const REF_IMG_PROMPT_PLACEHOLDER = "REF_IMG_PROMPT_PLACEHOLDER";
 export const REF_IMG_PROMPT_INVALID = "REF_IMG_PROMPT_INVALID";
 
-interface CharacterPrompt {
+export interface CharacterPrompt {
   type: "character";
   name: string;
   weight: number;
