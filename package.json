@@ -19,12 +19,26 @@
   "author": "Neta Team",
   "license": "MIT",
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=2.0.0"
   },
+  "packageManager": "pnpm@10.25.0",
   "scripts": {
+    "lint": "biome check . --write --unsafe",
     "validate:skill": "cd skills/neta && npm run validate",
-    "lint:skill": "cd skills/neta && npm run lint",
-    "typecheck:skill": "cd skills/neta && npm run typecheck",
-    "check": "npm run validate:skill && npm run lint:skill && npm run typecheck:skill"
+    "type-check:skill": "cd skills/neta && npm run type-check",
+    "check": "pnpm lint && pnpm type-check:skill && pnpm validate:skill",
+    "dev:skills": "pnpm --filter @neta/skills-neta dev",
+    "start:skills": "pnpm --filter @neta/skills-neta start",
+    "build:skills": "pnpm --filter @neta/skills-neta build",
+    "changelog": "changeset",
+    "bump": "changeset version"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.3.8",
+    "@changesets/cli": "^2.29.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.3.1",
+    "rimraf": "^6.1.3",
+    "typescript": "^5.9.3"
   }
 }

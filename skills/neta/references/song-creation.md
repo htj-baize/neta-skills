@@ -1,6 +1,6 @@
 # 歌曲生成最佳实践
 
-适用于 `make-song` 命令。
+适用于 `make_song` 命令。
 
 ---
 
@@ -134,25 +134,25 @@
 ### 角色主题曲
 
 ```bash
-npm start make-song \
-  -p "角色专属主题曲，J-Pop 风格，活泼可爱，魔法少女感，电子合成器，明快节奏" \
-  -l "[歌词内容...]"
+pnpm start make_song \
+  --prompt "角色专属主题曲，J-Pop 风格，活泼可爱，魔法少女感，电子合成器，明快节奏" \
+  --lyrics "[歌词内容...]"
 ```
 
 ### 背景音乐
 
 ```bash
-npm start make-song \
-  -p "轻柔的钢琴背景音乐，宁静安详，适合阅读，舒缓节奏" \
-  -l "[纯音乐可省略歌词或使用简单的哼唱]"
+pnpm start make_song \
+  --prompt "轻柔的钢琴背景音乐，宁静安详，适合阅读，舒缓节奏" \
+  --lyrics "[纯音乐可省略歌词或使用简单的哼唱]"
 ```
 
 ### 战斗曲
 
 ```bash
-npm start make-song \
-  -p "激昂的战斗曲，摇滚风格，电吉他，强烈鼓点，热血沸腾" \
-  -l "[Verse 1]
+pnpm start make_song \
+  --prompt "激昂的战斗曲，摇滚风格，电吉他，强烈鼓点，热血沸腾" \
+  --lyrics "[Verse 1]
   燃烧吧斗志
   冲破黑暗黎明
   ..."
@@ -161,9 +161,9 @@ npm start make-song \
 ### 抒情歌曲
 
 ```bash
-npm start make-song \
-  -p "温柔的抒情歌曲，民谣风格，吉他伴奏，清新自然，淡淡忧伤" \
-  -l "[Verse 1]
+pnpm start make_song \
+  --prompt "温柔的抒情歌曲，民谣风格，吉他伴奏，清新自然，淡淡忧伤" \
+  --lyrics "[Verse 1]
   雨后的街道
   一个人走着
   ..."

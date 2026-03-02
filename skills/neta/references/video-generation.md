@@ -1,6 +1,6 @@
 # 视频生成最佳实践
 
-适用于 `make-video` 命令。
+适用于 `make_video` 命令。
 
 ---
 
@@ -106,45 +106,45 @@
 ### 角色动态立绘
 
 ```bash
-npm start make-video \
-  -i "https://example.com/character.jpg" \
-  -p "角色轻轻呼吸，头发随风飘动，温暖的微笑，眼睛微微眨动" \
-  -m "model_s"
+pnpm start make_video \
+  --image_source "https://example.com/character.jpg" \
+  --prompt "角色轻轻呼吸，头发随风飘动，温暖的微笑，眼睛微微眨动" \
+  --model "model_s"
 ```
 
 ### 动态壁纸
 
 ```bash
-npm start make-video \
-  -i "https://example.com/scenery.jpg" \
-  -p "星空缓缓旋转，流星缓慢划过，梦幻的光点闪烁，宁静祥和" \
-  -m "model_w"
+pnpm start make_video \
+  --image_source "https://example.com/scenery.jpg" \
+  --prompt "星空缓缓旋转，流星缓慢划过，梦幻的光点闪烁，宁静祥和" \
+  --model "model_w"
 ```
 
 ### 视频封面动效
 
 ```bash
-npm start make-video \
-  -i "https://example.com/cover.jpg" \
-  -p "标题文字微微发光，背景有粒子飘动，电影感" \
-  -m "model_s"
+pnpm start make_video \
+  --image_source "https://example.com/cover.jpg" \
+  --prompt "标题文字微微发光，背景有粒子飘动，电影感" \
+  --model "model_s"
 ```
 
 ### 从图片生成完整流程
 
 ```bash
 # 1. 生成图片（16:9 适合视频）
-npm start make-image \
-  -p "梦幻的星空背景，流星划过，深蓝色调" \
-  -a "16:9"
+pnpm start make_image \
+  --prompt "梦幻的星空背景，流星划过，深蓝色调" \
+  --aspect "16:9"
 
 # 2. 从输出中获取图片 URL
 
 # 3. 生成视频
-npm start make-video \
-  -i "<图片 URL>" \
-  -p "星空缓缓旋转，流星缓慢划过" \
-  -m "model_w"
+pnpm start make_video \
+  --image_source "<图片 URL>" \
+  --prompt "星空缓缓旋转，流星缓慢划过" \
+  --model "model_w"
 ```
 
 ---

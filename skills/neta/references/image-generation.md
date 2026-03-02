@@ -1,6 +1,6 @@
 # 图片生成最佳实践
 
-适用于 `make-image` 和 `remove-background` 命令。
+适用于 `make_image` 和 `remove_background` 命令。
 
 ---
 
@@ -54,44 +54,39 @@
 ### 角色立绘
 
 ```bash
-npm start make-image \
-  -p "一个穿着校服的日本女高中生，黑色长发，红色蝴蝶结，站在教室门口，阳光从窗户洒进来，清新自然" \
-  -a "3:4"
+pnpm start make_image \
+  --prompt "一个穿着校服的日本女高中生，黑色长发，红色蝴蝶结，站在教室门口，阳光从窗户洒进来，清新自然" \
+  --aspect "3:4"
 ```
 
 ### 三视图设定
 
 ```bash
 # 正面
-npm start make-image -p "角色名，正面视图，白色背景，全身像" -a "3:4"
+pnpm start make_image --prompt "角色名，正面视图，白色背景，全身像" --aspect "3:4"
 
 # 侧面
-npm start make-image -p "角色名，侧面视图，白色背景，全身像" -a "3:4"
+pnpm start make_image --prompt "角色名，侧面视图，白色背景，全身像" --aspect "3:4"
 
 # 背面
-npm start make-image -p "角色名，背面视图，白色背景，全身像" -a "3:4"
+pnpm start make_image --prompt "角色名，背面视图，白色背景，全身像" --aspect "3:4"
 ```
 
 ### 表情集
 
 ```bash
-npm start make-image -p "角色名，开心表情，特写，白色背景" -a "1:1"
-npm start make-image -p "角色名，生气表情，特写，白色背景" -a "1:1"
-npm start make-image -p "角色名，惊讶表情，特写，白色背景" -a "1:1"
-npm start make-image -p "角色名，害羞表情，特写，白色背景" -a "1:1"
+pnpm start make_image --prompt "角色名，开心表情，特写，白色背景" --aspect "1:1"
+pnpm start make_image --prompt "角色名，生气表情，特写，白色背景" --aspect "1:1"
+pnpm start make_image --prompt "角色名，惊讶表情，特写，白色背景" --aspect "1:1"
+pnpm start make_image --prompt "角色名，害羞表情，特写，白色背景" --aspect "1:1"
 ```
 
 ### 去背景（抠图）
 
 ```bash
-# 1. 先生成图片
-result=$(npm start make-image -p "一个角色，白色背景")
-
-# 2. 提取 artifact UUID
-uuid=$(echo $result | jq -r '.artifacts[0].uuid')
-
-# 3. 移除背景
-npm start remove-background -i "$uuid"
+# 需在 manuscript 模式下使用 assign 工具保存图片到变量后，通过变量引用
+# 例如：{image_my_ref}
+pnpm start remove_background --input_image "{image_variable_name}"
 ```
 
 ---
@@ -146,7 +141,7 @@ npm start remove-background -i "$uuid"
 2. 保存成功的提示词模板
 3. 先查询角色详情获取标准描述
    ```bash
-   npm start request-character -n "角色名"
+   pnpm start request_character --name "角色名"
    ```
 4. 基于角色描述生成提示词
 

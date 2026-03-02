@@ -1,6 +1,6 @@
 # 角色查询最佳实践
 
-适用于 `search-tcp`、`request-character` 和 `request-character-or-style` 命令。
+适用于 `search_character_or_elementum`、`request_character` 和 `request_character_or_elementum` 命令。
 
 ---
 
@@ -20,7 +20,7 @@
 
 ```bash
 # 使用精确排序
-npm start search-tcp -k "角色全名" -s "exact" -t "character"
+pnpm start search_character_or_elementum --keywords "角色全名" --sort_scheme "exact" --parent_type "character"
 ```
 
 ### 模糊搜索
@@ -29,17 +29,17 @@ npm start search-tcp -k "角色全名" -s "exact" -t "character"
 
 ```bash
 # 使用相关性排序
-npm start search-tcp -k "关键词" -s "best" -t "both"
+pnpm start search_character_or_elementum --keywords "关键词" --sort_scheme "best" --parent_type "both"
 ```
 
 ### 分页浏览
 
 ```bash
 # 第一页
-npm start search-tcp -k "魔法少女" --page-index 0 --page-size 10
+pnpm start search_character_or_elementum --keywords "魔法少女" --page_index 0 --page_size 10
 
 # 第二页
-npm start search-tcp -k "魔法少女" --page-index 1 --page-size 10
+pnpm start search_character_or_elementum --keywords "魔法少女" --page_index 1 --page_size 10
 ```
 
 ---
@@ -68,13 +68,13 @@ npm start search-tcp -k "魔法少女" --page-index 1 --page-size 10
 ### 通过名称
 
 ```bash
-npm start request-character -n "角色名"
+pnpm start request_character --name "角色名"
 ```
 
 ### 通过 UUID
 
 ```bash
-npm start request-character-or-style -u "角色-uuid"
+pnpm start request_character_or_elementum --uuid "角色-uuid"
 ```
 
 ### 返回数据示例
@@ -104,25 +104,25 @@ npm start request-character-or-style -u "角色-uuid"
 
 ```bash
 # 1. 获取角色标准信息
-npm start request-character -n "初音未来"
+pnpm start request_character --name "初音未来"
 
 # 2. 从返回中提取特征描述
 # age: "16", 葱绿色双马尾，等等
 
 # 3. 生成图片
-npm start make-image \
-  -p "16 岁少女，葱绿色双马尾，穿着标志性服装，手持大葱，舞台背景" \
-  -a "3:4"
+pnpm start make_image \
+  --prompt "16 岁少女，葱绿色双马尾，穿着标志性服装，手持大葱，舞台背景" \
+  --aspect "3:4"
 ```
 
 ### 标签角色调研
 
 ```bash
 # 1. 获取标签下的角色列表
-npm start get-hashtag-characters -t "热门标签" --sort-by "hot"
+pnpm start get_hashtag_characters --hashtag "热门标签" --sort_by "hot"
 
 # 2. 获取感兴趣角色的详情
-npm start request-character -n "角色名"
+pnpm start request_character --name "角色名"
 
 # 3. 分析角色特征，确定创作方向
 ```
@@ -131,10 +131,10 @@ npm start request-character -n "角色名"
 
 ```bash
 # 搜索风格元素
-npm start search-tcp -k "赛博朋克" -t "elementum"
+pnpm start search_character_or_elementum --keywords "赛博朋克" --parent_type "elementum"
 
 # 获取元素详情
-npm start request-character-or-style -n "赛博朋克风格"
+pnpm start request_character_or_elementum --name "赛博朋克风格"
 ```
 
 ---
@@ -146,28 +146,28 @@ npm start request-character-or-style -n "赛博朋克风格"
 有些角色有多个名称：
 ```bash
 # 尝试不同名称
-npm start search-tcp -k "角色全名" -s "exact"
-npm start search-tcp -k "角色简称" -s "exact"
+pnpm start search_character_or_elementum --keywords "角色全名" --sort_scheme "exact"
+pnpm start search_character_or_elementum --keywords "角色简称" --sort_scheme "exact"
 ```
 
 ### 组合关键词
 
 ```bash
 # 特征 + 类型
-npm start search-tcp -k "粉色头发 魔法少女" -t "character"
+pnpm start search_character_or_elementum --keywords "粉色头发 魔法少女" --parent_type "character"
 
 # 作品名 + 角色
-npm start search-tcp -k "作品名 角色名" -s "exact"
+pnpm start search_character_or_elementum --keywords "作品名 角色名" --sort_scheme "exact"
 ```
 
 ### 利用标签筛选
 
 ```bash
 # 先查标签
-npm start get-hashtag-info -t "标签名"
+pnpm start get_hashtag_info --hashtag "标签名"
 
 # 再查标签下角色
-npm start get-hashtag-characters -t "标签名"
+pnpm start get_hashtag_characters --hashtag "标签名"
 ```
 
 ---
@@ -178,17 +178,17 @@ npm start get-hashtag-characters -t "标签名"
 
 ```bash
 # 第一次查询并保存
-npm start request-character -n "角色名" > character_cache/角色名.json
+pnpm start request_character --name "角色名" > character_cache/角色名.json
 
 # 后续使用缓存数据
 cat character_cache/角色名.json
 ```
 
-### 缓存搜索结果的
+### 缓存搜索结果
 
 ```bash
 # 保存搜索结果
-npm start search-tcp -k "关键词" > search_cache/关键词.json
+pnpm start search_character_or_elementum --keywords "关键词" > search_cache/关键词.json
 ```
 
 ---
