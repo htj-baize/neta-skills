@@ -1,9 +1,5 @@
 import z from "zod";
 import type { CharacterAssign, ElementumAssign } from "../../apis/types.ts";
-import {
-  TalesofaiMcpError,
-  TalesofaiMcpErrorCodes,
-} from "../../utils/errors.ts";
 import { parseMeta } from "../../utils/parse_meta.ts";
 import { createCommand } from "../factory.ts";
 import {
@@ -38,10 +34,7 @@ export const requestCharacterOrElementum = createCommand(
 
     const getTcp = async () => {
       if (!uuid && !name) {
-        throw new TalesofaiMcpError(
-          TalesofaiMcpErrorCodes.InvalidParams,
-          "必须提供name或uuid参数之一",
-        );
+        throw new Error("必须提供name或uuid参数之一");
       }
 
       if (uuid) {
@@ -77,18 +70,14 @@ export const requestCharacterOrElementum = createCommand(
 
     const tcp = await getTcp();
     if (!tcp) {
-      throw new TalesofaiMcpError(
-        TalesofaiMcpErrorCodes.TcpNotFound,
-        `未找到角色或元素: ${name || uuid}`,
-      );
+      throw new Error(`未找到角色或元素: ${name || uuid}`);
     }
 
     log.info(`request_character_or_elementum: tcp: ${JSON.stringify(tcp)}`);
 
     if (tcp.type === "oc" || tcp.type === "official") {
       if (!targetType.includes("character")) {
-        throw new TalesofaiMcpError(
-          TalesofaiMcpErrorCodes.TcpTypeMismatch,
+        throw new Error(
           `找到的类型为"character"（角色），但指定了parent_type="elementum"（风格元素）。请调整parent_type参数或使用不同的名称搜索。`,
         );
       }
@@ -117,8 +106,7 @@ export const requestCharacterOrElementum = createCommand(
 
     if (tcp.type === "elementum") {
       if (!targetType.includes("elementum")) {
-        throw new TalesofaiMcpError(
-          TalesofaiMcpErrorCodes.TcpTypeMismatch,
+        throw new Error(
           `找到的类型为"elementum"（风格元素），但指定了parent_type="character"（角色）。请调整parent_type参数或使用不同的名称搜索。`,
         );
       }
@@ -142,9 +130,6 @@ export const requestCharacterOrElementum = createCommand(
 
     log.warn(`request_character_or_elementum: unknown tcp type: ${tcp.type}`);
 
-    throw new TalesofaiMcpError(
-      TalesofaiMcpErrorCodes.TcpTypeMismatch,
-      `未知TCP类型: ${tcp.type}`,
-    );
+    throw new Error(`未知TCP类型: ${tcp.type}`);
   },
 );

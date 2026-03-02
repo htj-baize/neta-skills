@@ -6,7 +6,7 @@ import {
 } from "@commander-js/extra-typings";
 import type { ZodObject } from "zod";
 import { createApis } from "../apis/index.ts";
-import { ApiResponseError, TalesofaiMcpError } from "../utils/errors.ts";
+import { ApiResponseError } from "../utils/errors.ts";
 import { type Command, isCommand } from "./factory.ts";
 
 export const loadCommands = async (domains: string[]) => {
@@ -177,25 +177,21 @@ export const buildCommands = async (
             sendNotification: () => Promise.resolve(),
           })
           .catch((e: unknown) => {
-            if (e instanceof TalesofaiMcpError) {
-              logger.error(
-                JSON.stringify({
-                  error: {
-                    type: e.name,
-                    code: e.code,
-                    message: e.message,
-                    data: e.data,
-                  },
-                }),
-              );
-              return null;
-            }
-
             if (e instanceof ApiResponseError) {
               logger.error({
                 error: {
                   type: e.name,
                   code: e.code,
+                  message: e.message,
+                },
+              });
+              return null;
+            }
+
+            if (e instanceof Error) {
+              logger.error({
+                error: {
+                  type: e.name,
                   message: e.message,
                 },
               });
@@ -227,23 +223,21 @@ export const buildCommands = async (
             sendNotification: () => Promise.resolve(),
           })
           .catch((e: unknown) => {
-            if (e instanceof TalesofaiMcpError) {
-              logger.error({
-                error: {
-                  type: e.name,
-                  code: e.code,
-                  message: e.message,
-                  data: e.data,
-                },
-              });
-              return null;
-            }
-
             if (e instanceof ApiResponseError) {
               logger.error({
                 error: {
                   type: e.name,
                   code: e.code,
+                  message: e.message,
+                },
+              });
+              return null;
+            }
+
+            if (e instanceof Error) {
+              logger.error({
+                error: {
+                  type: e.name,
                   message: e.message,
                 },
               });

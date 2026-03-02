@@ -10,7 +10,7 @@ import { readdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { Option, } from "@commander-js/extra-typings";
 import { createApis } from "../apis/index.js";
-import { ApiResponseError, TalesofaiMcpError } from "../utils/errors.js";
+import { ApiResponseError } from "../utils/errors.js";
 import { isCommand } from "./factory.js";
 export const loadCommands = async (domains) => {
     const cmdFiles = await Promise.all(domains.map(async (domain) => {
@@ -124,22 +124,20 @@ export const buildCommands = async (cli, commands) => {
                     sendNotification: () => Promise.resolve(),
                 })
                     .catch((e) => {
-                    if (e instanceof TalesofaiMcpError) {
-                        logger.error(JSON.stringify({
-                            error: {
-                                type: e.name,
-                                code: e.code,
-                                message: e.message,
-                                data: e.data,
-                            },
-                        }));
-                        return null;
-                    }
                     if (e instanceof ApiResponseError) {
                         logger.error({
                             error: {
                                 type: e.name,
                                 code: e.code,
+                                message: e.message,
+                            },
+                        });
+                        return null;
+                    }
+                    if (e instanceof Error) {
+                        logger.error({
+                            error: {
+                                type: e.name,
                                 message: e.message,
                             },
                         });
@@ -171,22 +169,20 @@ export const buildCommands = async (cli, commands) => {
                     sendNotification: () => Promise.resolve(),
                 })
                     .catch((e) => {
-                    if (e instanceof TalesofaiMcpError) {
-                        logger.error({
-                            error: {
-                                type: e.name,
-                                code: e.code,
-                                message: e.message,
-                                data: e.data,
-                            },
-                        });
-                        return null;
-                    }
                     if (e instanceof ApiResponseError) {
                         logger.error({
                             error: {
                                 type: e.name,
                                 code: e.code,
+                                message: e.message,
+                            },
+                        });
+                        return null;
+                    }
+                    if (e instanceof Error) {
+                        logger.error({
+                            error: {
+                                type: e.name,
                                 message: e.message,
                             },
                         });

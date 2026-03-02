@@ -35,7 +35,6 @@
   },
   "dependencies": {
     "@commander-js/extra-typings": "^14.0.0",
-    "@modelcontextprotocol/sdk": "^1.27.1",
     "axios": "^1.7.9",
     "commander": "^14.0.0",
     "dotenv": "^16.4.7",
