@@ -1,6 +1,6 @@
 # 角色查询最佳实践
 
-适用于 `search_character_or_elementum`、`request_character` 和 `request_character_or_elementum` 命令。
+适用于 `search_character_or_elementum` 和 `request_character_or_elementum` 命令。
 
 ---
 
@@ -68,7 +68,7 @@ pnpm start search_character_or_elementum --keywords "魔法少女" --page_index 
 ### 通过名称
 
 ```bash
-pnpm start request_character --name "角色名"
+pnpm start request_character_or_elementum --name "角色名"
 ```
 
 ### 通过 UUID
@@ -104,7 +104,7 @@ pnpm start request_character_or_elementum --uuid "角色-uuid"
 
 ```bash
 # 1. 获取角色标准信息
-pnpm start request_character --name "初音未来"
+pnpm start request_character_or_elementum --name "初音未来"
 
 # 2. 从返回中提取特征描述
 # age: "16", 葱绿色双马尾，等等
@@ -122,7 +122,7 @@ pnpm start make_image \
 pnpm start get_hashtag_characters --hashtag "热门标签" --sort_by "hot"
 
 # 2. 获取感兴趣角色的详情
-pnpm start request_character --name "角色名"
+pnpm start request_character_or_elementum --name "角色名"
 
 # 3. 分析角色特征，确定创作方向
 ```
@@ -178,7 +178,7 @@ pnpm start get_hashtag_characters --hashtag "标签名"
 
 ```bash
 # 第一次查询并保存
-pnpm start request_character --name "角色名" > character_cache/角色名.json
+pnpm start request_character_or_elementum --name "角色名" > character_cache/角色名.json
 
 # 后续使用缓存数据
 cat character_cache/角色名.json

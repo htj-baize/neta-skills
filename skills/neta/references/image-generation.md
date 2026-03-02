@@ -84,9 +84,7 @@ pnpm start make_image --prompt "角色名，害羞表情，特写，白色背景
 ### 去背景（抠图）
 
 ```bash
-# 需在 manuscript 模式下使用 assign 工具保存图片到变量后，通过变量引用
-# 例如：{image_my_ref}
-pnpm start remove_background --input_image "{image_variable_name}"
+pnpm start remove_background --input_image "image_uuid"
 ```
 
 ---
@@ -141,7 +139,7 @@ pnpm start remove_background --input_image "{image_variable_name}"
 2. 保存成功的提示词模板
 3. 先查询角色详情获取标准描述
    ```bash
-   pnpm start request_character --name "角色名"
+   pnpm start request_character_or_elementum --name "角色名"
    ```
 4. 基于角色描述生成提示词
 
