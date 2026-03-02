@@ -58,10 +58,11 @@ The unified skill includes a built-in CLI for testing and automation.
 ### Setup
 
 ```bash
-# 1. Clone & Install
+# 1. Clone & Install & Build
 git clone https://github.com/neta-skills.git
-cd neta-skills/skills/neta
-npm install
+corepack enabled
+pnpm i
+pnpm -r build
 
 # 2. Configure Environment
 # Set NETA_TOKEN in your environment or create a .env file
@@ -72,14 +73,14 @@ export NETA_TOKEN=your_token_here
 
 ```bash
 # Get general help or specific command help
-npm start --help
-npm start make-image --help
+pnpm start:skills --help
+pnpm start:skills make-image --help
 
 # Example: Generate an image
-npm start make-image -p "A cyberpunk cityscape at night" -a "16:9"
+pnpm start:skills make-image --prompt "A cyberpunk cityscape at night" --aspect "16:9"
 
 # Example: Search for characters
-npm start search-tcp -k "fantasy"
+pnpm start:skills search-tcp --keywords "fantasy"
 ```
 
 ---
@@ -94,9 +95,11 @@ neta-skills/
 │       ├── package.json        # Dependencies
 │       ├── src/
 │       │   ├── cli.ts          # CLI entry point
-│       │   ├── api/            # API client
-│       │   ├── commands/       # Command definitions
-│       │   └── types.ts        # TypeScript types
+│       │   ├── apis/           # API clients (activity, artifact, audio, verse, etc.)
+│       │   ├── commands/       # Command definitions (assign, community, verse)
+│       │   └── utils/          # Shared utilities
+│       ├── bin/                # Compiled JS output
+│       ├── scripts/            # Build scripts
 │       └── references/         # Best practices & workflow guides
 ├── .env.example                # Environment template
 └── package.json                # Root config
@@ -126,17 +129,20 @@ To develop and test locally:
 
 ```bash
 # Install dependencies
-cd skills/neta
-npm install
+corepack enabled
+pnpm i
 
 # Run TypeScript type checking
-npm run typecheck
+pnpm -r type-check
 
 # Run lint
-npm run lint
+pnpm lint
 
 # Test CLI commands locally
-npm start <command> [options]
+pnpm dev:skills <command> [options]
+
+# Build bin scripts
+pnpm -r build
 ```
 
 ## 📄 License

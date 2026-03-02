@@ -1,6 +1,6 @@
 # 标签调研最佳实践
 
-适用于 `get-hashtag-info`、`get-hashtag-characters` 和 `get-hashtag-collections` 命令。
+适用于 `get_hashtag_info`、`get_hashtag_characters` 和 `get_hashtag_collections` 命令。
 
 ---
 
@@ -17,7 +17,7 @@
 ### 基本信息查询
 
 ```bash
-npm start get-hashtag-info -t "标签名"
+pnpm start get_hashtag_info --hashtag "标签名"
 ```
 
 **返回内容：**
@@ -54,36 +54,36 @@ lore 包含标签的世界观和设定，是创作的重要参考：
 ### 获取热门角色
 
 ```bash
-npm start get-hashtag-characters \
-  -t "标签名" \
-  --sort-by "hot" \
-  --page-size 20
+pnpm start get_hashtag_characters \
+  --hashtag "标签名" \
+  --sort_by "hot" \
+  --page_size 20
 ```
 
 ### 获取最新角色
 
 ```bash
-npm start get-hashtag-characters \
-  -t "标签名" \
-  --sort-by "newest" \
-  --page-size 20
+pnpm start get_hashtag_characters \
+  --hashtag "标签名" \
+  --sort_by "newest" \
+  --page_size 20
 ```
 
 ### 筛选角色类型
 
 ```bash
 # 只看 OC 角色
-npm start get-hashtag-characters -t "标签名" --parent-type "oc"
+pnpm start get_hashtag_characters --hashtag "标签名" --parent_type "oc"
 
 # 只看风格元素
-npm start get-hashtag-characters -t "标签名" --parent-type "elementum"
+pnpm start get_hashtag_characters --hashtag "标签名" --parent_type "elementum"
 ```
 
 ### 分析角色特征
 
 ```bash
 # 1. 获取角色列表
-npm start get-hashtag-characters -t "标签名" > characters.json
+pnpm start get_hashtag_characters --hashtag "标签名" > characters.json
 
 # 2. 分析热门角色的共同特征
 # - 发型/发色分布
@@ -91,7 +91,7 @@ npm start get-hashtag-characters -t "标签名" > characters.json
 # - 常见元素
 
 # 3. 获取详情
-npm start request-character -n "热门角色名"
+pnpm start request_character --name "热门角色名"
 ```
 
 ---
@@ -101,7 +101,7 @@ npm start request-character -n "热门角色名"
 ### 获取精选作品
 
 ```bash
-npm start get-hashtag-collections -t "标签名"
+pnpm start get_hashtag_collections --hashtag "标签名"
 ```
 
 **返回内容：**
@@ -114,7 +114,7 @@ npm start get-hashtag-collections -t "标签名"
 
 ```bash
 # 1. 获取合集
-npm start get-hashtag-collections -t "标签名" > collections.json
+pnpm start get_hashtag_collections --hashtag "标签名" > collections.json
 
 # 2. 分析高赞作品
 # - 使用的角色
@@ -141,19 +141,19 @@ npm start get-hashtag-collections -t "标签名" > collections.json
 
 ```bash
 # 1. 了解标签整体信息
-npm start get-hashtag-info -t "魔法少女"
+pnpm start get_hashtag_info --hashtag "魔法少女"
 
 # 2. 查看热门角色（前 20 个）
-npm start get-hashtag-characters -t "魔法少女" --sort-by "hot" --page-size 20
+pnpm start get_hashtag_characters --hashtag "魔法少女" --sort_by "hot" --page_size 20
 
 # 3. 查看精选作品
-npm start get-hashtag-collections -t "魔法少女"
+pnpm start get_hashtag_collections --hashtag "魔法少女"
 
 # 4. 获取感兴趣角色的详情
-npm start request-character -n "角色名"
+pnpm start request_character --name "角色名"
 
 # 5. 基于调研结果创作
-npm start make-image -p "符合标签风格的提示词..."
+pnpm start make_image --prompt "符合标签风格的提示词..."
 ```
 
 ---
@@ -190,9 +190,9 @@ npm start make-image -p "符合标签风格的提示词..."
 ```bash
 # 保存完整调研数据
 mkdir research/标签名
-npm start get-hashtag-info -t "标签名" > research/标签名/info.json
-npm start get-hashtag-characters -t "标签名" > research/标签名/characters.json
-npm start get-hashtag-collections -t "标签名" > research/标签名/collections.json
+pnpm start get_hashtag_info --hashtag "标签名" > research/标签名/info.json
+pnpm start get_hashtag_characters --hashtag "标签名" > research/标签名/characters.json
+pnpm start get_hashtag_collections --hashtag "标签名" > research/标签名/collections.json
 ```
 
 ---
@@ -203,10 +203,10 @@ npm start get-hashtag-collections -t "标签名" > research/标签名/collection
 
 ```bash
 # 1. 调研现有角色，避免重复
-npm start search-tcp -k "角色特征" -t "character"
+pnpm start search_character_or_elementum --keywords "角色特征" --parent_type "character"
 
 # 2. 调研相关标签的热门元素
-npm start get-hashtag-characters -t "相关标签"
+pnpm start get_hashtag_characters --hashtag "相关标签"
 
 # 3. 基于调研设计独特角色
 ```
@@ -215,10 +215,10 @@ npm start get-hashtag-characters -t "相关标签"
 
 ```bash
 # 1. 调研标签 lore 和设定
-npm start get-hashtag-info -t "标签名"
+pnpm start get_hashtag_info --hashtag "标签名"
 
 # 2. 分析精选作品的主题
-npm start get-hashtag-collections -t "标签名"
+pnpm start get_hashtag_collections --hashtag "标签名"
 
 # 3. 策划符合标签调性的系列内容
 ```
@@ -227,12 +227,12 @@ npm start get-hashtag-collections -t "标签名"
 
 ```bash
 # 1. 收集热门标签
-npm start get-hashtag-info -t "标签 1"
-npm start get-hashtag-info -t "标签 2"
+pnpm start get_hashtag_info --hashtag "标签 1"
+pnpm start get_hashtag_info --hashtag "标签 2"
 
 # 2. 对比各标签的热门角色
-npm start get-hashtag-characters -t "标签 1" --sort-by "hot"
-npm start get-hashtag-characters -t "标签 2" --sort-by "hot"
+pnpm start get_hashtag_characters --hashtag "标签 1" --sort_by "hot"
+pnpm start get_hashtag_characters --hashtag "标签 2" --sort_by "hot"
 
 # 3. 分析差异和机会点
 ```
