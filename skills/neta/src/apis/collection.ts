@@ -1,7 +1,8 @@
 import type { AxiosInstance } from "axios";
 import qs from "qs";
 import type { CharacterPrompt } from "../utils/prompts.ts";
-import type { ArtifactDetail } from "./types.ts";
+import type { ArtifactDetail, ArtifactVerseListStatus } from "./types.ts";
+import type { UserInfo, UserSubscribeStatus } from "./user.ts";
 
 export type CollectionStatus =
   | "INIT"
@@ -100,6 +101,379 @@ export type CollectionPublishPayload = Partial<
   description: string;
   //
   additional_verse_artifact_uuid?: string | null;
+};
+
+export interface CreatorForStoryShowcase {
+  uuid: string;
+  nick_name: string;
+  avatar_url: string;
+  subscribe_status: UserSubscribeStatus;
+  properties: UserInfo["properties"];
+}
+
+interface BaseModule {
+  module_id: string;
+  template_id: string;
+  json_data: unknown;
+  data_id: string;
+}
+
+interface NewsMainHeaderNormalModule extends BaseModule {
+  template_id: "head_filter_module";
+  json_data: {
+    filter_list: { theme: string }[];
+    selected_theme: string;
+  };
+}
+
+interface ActivityModule extends BaseModule {
+  template_id: "ACTIVITY";
+  json_data: {
+    sub_activities: {
+      uuid: string;
+      tag_name: string;
+      title: string;
+      start_time: number;
+      end_time: number;
+      status: "RUNNING";
+      popularity: number;
+      participants_count: number;
+      banner_pic: string;
+      small_banner_pic: string;
+      creator_name: string;
+      creator_avatar_url: string;
+      weight: number;
+    }[];
+    event_tracking: Record<string, unknown>;
+  };
+}
+
+interface NormalModule extends BaseModule {
+  template_id: "NORMAL";
+  json_data: {
+    id: number;
+    storyId: string;
+    name: string;
+    coverUrl: string;
+    shareUrl: string;
+    pageLength: number;
+    version: string | null;
+    api_version: string | null;
+    aspect: string;
+    content: string | null;
+    status: string;
+    isRecommended: boolean | null;
+    score: number | null;
+    userId: number | null;
+    user_uuid: string;
+    user_nick_name: string;
+    user_avatar_url: string;
+    user_properties: UserInfo["properties"];
+    activity: string | null;
+    has_video: boolean;
+    has_bgm: boolean | null;
+    video_uuid: string;
+    likeCount: number;
+    likeStatus: CollectionLikeStatus;
+    favorStatus: CollectionFavorStatus;
+    commentCount: number | null;
+    sharedCount: number | null;
+    sameStyleCount: number;
+    picCount: number;
+    character_list: unknown[];
+    mtime: string;
+    ctime: string;
+    images: unknown[] | null;
+    is_pinned: boolean | null;
+    hashtag_names: string[];
+    hashtag_show: {
+      activity?: string;
+      hashtag?: string;
+    };
+    recall_type: string;
+    rank_score: number;
+    is_interactive: boolean;
+    event_tracking: Record<string, unknown>;
+    extra_datas: Record<string, unknown>;
+  };
+}
+
+interface TopicModule extends BaseModule {
+  template_id: "TOPIC";
+  json_data: {
+    uuid: string;
+    tag_name: string;
+    title: string;
+    start_time: number;
+    end_time: number;
+    status: "RUNNING";
+    popularity: number;
+    participants_count: number;
+    banner_pic: string;
+    small_banner_pic: string;
+    creator_name: string;
+    creator_avatar_url: string;
+    weight: number;
+  };
+}
+
+export type CommunityModule =
+  | NewsMainHeaderNormalModule
+  | ActivityModule
+  | NormalModule
+  | TopicModule;
+
+interface ModuleListHeader {
+  module_list: CommunityModule[];
+}
+
+interface PageData {
+  page_index: number;
+  page_size: number;
+  has_next_page: boolean;
+  biz_trace_id: string;
+}
+
+export interface FeedMainList {
+  module_list_header: ModuleListHeader;
+  module_list: CommunityModule[];
+
+  page_data: PageData;
+}
+
+interface CTAInfoBasic {
+  interactive_status: ("SUCCESS" & string) | null;
+  interactive_config: {
+    hint: string;
+    intention: null;
+    input_type: "verse" | null;
+    verse_uuid?: string;
+    button_name: string;
+    verse_artifact_uuid?: string;
+  } | null;
+}
+
+interface NormalCTAInfo extends CTAInfoBasic {
+  type: "verse_1";
+  launch_prompt: {
+    core_input: string;
+    brief_input: string;
+    ref_image: { uuid: string; url: string }[];
+  };
+}
+
+interface Exp1CTAInfo extends CTAInfoBasic {
+  type: "verse_exp_1";
+  /** 问题 */
+  question: string;
+  /**
+   * 选择文本 && 对应 input
+   */
+  choices: {
+    button_text: string;
+    core_input: string;
+    ref_image: { uuid: string; url: string }[];
+  }[];
+}
+
+interface Exp2CTAInfo extends CTAInfoBasic {
+  type: "verse_exp_2";
+  /** 角色发言 */
+  character_text: string;
+  launch_prompt: {
+    core_input: string;
+    brief_input: string;
+    ref_image: [];
+  };
+}
+
+interface Exp3CTAInfo extends CTAInfoBasic {
+  type: "verse_exp_3";
+  amount_of_character: number;
+  characters: { uuid: string; name: string; avatar_img: string }[];
+  launch_prompt: {
+    core_input: string;
+    brief_input: string;
+    ref_image: [];
+  };
+}
+
+export interface HashtagUnitCTA {
+  type: "hashtag_unit_cta";
+  cover_image: string;
+  title: string;
+  desc: string;
+  button: {
+    text_new: string;
+    scheme: string;
+  };
+}
+
+export interface NormalImageCTA extends Omit<NormalCTAInfo, "type"> {
+  type: "image_1";
+}
+
+type CTAInfo =
+  | NormalCTAInfo
+  | Exp1CTAInfo
+  | Exp2CTAInfo
+  | Exp3CTAInfo
+  | HashtagUnitCTA
+  | NormalImageCTA;
+
+export type CollectionLikeStatus = "liked" | "unliked" | null;
+export type CollectionFavorStatus = "not_favorited" | "favorited" | null;
+
+export interface DisplayData {
+  mission_record_uuid?: string | null;
+  seed_campaign_uuid?: string | null;
+  is_declare_ai?: boolean;
+  pages: {
+    images: ArtifactDetail[];
+    [key: string]: unknown;
+  }[];
+  [key: string]: unknown;
+}
+
+export interface NormalInteractionData {
+  uuid: string;
+  name: string;
+  description: string | null;
+  version: string | null;
+  status: CollectionStatus;
+  aspect?: string;
+  activity?: string | null;
+  activityData: { uuid: string } | null;
+  commentCount: number;
+  hashtags: string[];
+  coverUrl: string;
+  shareUrl: string;
+  picCount: number;
+  sharedCount: number;
+  likeCount: number;
+  likeStatus: CollectionLikeStatus;
+  favorStatus: CollectionFavorStatus;
+  is_pinned: null;
+  video_uuid: string | null;
+  has_video: boolean;
+  bgm_uuid: string | null;
+  is_interactive: true;
+  mtime: string | null;
+  ctime: string;
+  creator: CreatorForStoryShowcase;
+  cta_info: CTAInfo;
+  event_tracking: unknown;
+  need_create: boolean;
+  displayData: DisplayData;
+  view_scheme?: string;
+  extra_datas?: unknown;
+
+  /**
+   * 原作信息
+   */
+  parent_collection_scheme?: string;
+  parent_collection_uuid?: string;
+  parent_collection_title?: string;
+  parent_collection_cover_url?: string;
+
+  /**
+   * 推荐理由
+   */
+
+  reason?: {
+    background_color?: string;
+    icon: string;
+    scheme?: string;
+    text: string;
+    text_color?: string;
+    type: string;
+  }[];
+
+  /**
+   * 内部召回属性
+   */
+  rank_score?: number;
+  recall_type?: string;
+}
+
+export interface NormalInteractionModule extends BaseModule {
+  template_id: "NORMAL";
+  json_data: NormalInteractionData;
+}
+
+export interface DraftInteractionData {
+  creator: CreatorForStoryShowcase;
+  displayData: DisplayData;
+  uuid: string;
+  modality: "VERSE";
+  label: {
+    icon: null;
+    text: string;
+    background_color: string;
+    text_color: string;
+    type: "user_tag";
+  };
+  cta_info: {
+    type: "manuscript_cta";
+    question: string;
+    avatar_url?: string;
+    choices: { text: string; scheme: string; background_color: string }[];
+  };
+  event_tracking: unknown;
+  view_scheme?: string;
+}
+
+interface DraftInteractionModule extends BaseModule {
+  template_id: "DRAFT";
+  json_data: DraftInteractionData;
+}
+
+export interface SpaceInteractionData {
+  preset_key: string;
+  readable_info: {
+    col_list: string[];
+    space: string;
+  };
+  space: string;
+  scheme: string;
+  cover_url: string;
+  next_action: {
+    intent_type: [string, string];
+    detail: {
+      item_uuids: string[];
+      target_tag: string;
+    };
+  };
+}
+
+export interface SpaceInteractionModule extends BaseModule {
+  template_id: "into_space";
+  json_data: SpaceInteractionData;
+}
+
+export type FeedInteractionModule =
+  | NormalInteractionModule
+  | DraftInteractionModule
+  | SpaceInteractionModule;
+
+export interface FeedInteractionList {
+  module_list_header: null;
+  module_list: FeedInteractionModule[];
+
+  page_data: PageData;
+}
+
+export interface HomeStatusQueueItem {
+  id: number;
+  uuid: string;
+  mtime: string;
+  running_status: ArtifactVerseListStatus;
+}
+
+export const isVerseCTA = (
+  cta_info: CTAInfo,
+): cta_info is NormalCTAInfo | Exp1CTAInfo | Exp2CTAInfo | Exp3CTAInfo => {
+  return "interactive_config" in cta_info;
 };
 
 export const createCollectionApis = (client: AxiosInstance) => {

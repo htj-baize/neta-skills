@@ -9,10 +9,7 @@ export const parseMeta = <T extends ZodObject>(
   importMeta: ImportMeta,
 ) => {
   const file = readFileSync(
-    new URL(
-      importMeta.filename.replace(/\.(ts|js)$/, `.${locale}.yml`),
-      importMeta.url,
-    ),
+    importMeta.filename.replace(/\.(ts|js)$/, `.${locale}.yml`),
     "utf-8",
   );
   return schema.parse(yaml.parse(file));

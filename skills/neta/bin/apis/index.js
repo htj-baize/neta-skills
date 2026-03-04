@@ -5,6 +5,7 @@ import { createArtifactApis } from "./artifact.js";
 import { createAudioApis } from "./audio.js";
 import { createCollectionApis } from "./collection.js";
 import { createConfigApis } from "./config.js";
+import { createFeedsApis } from "./feeds.js";
 import { createGptApis } from "./gpt.js";
 import { createHashtagApis, } from "./hashtag.js";
 import { createPromptApis } from "./prompt.js";
@@ -36,6 +37,7 @@ export const createApis = (option) => {
     const config = createConfigApis(client);
     const user = createUserApis(client);
     const collection = createCollectionApis(client);
+    const feeds = createFeedsApis(client);
     return {
         tcp,
         prompt,
@@ -49,5 +51,6 @@ export const createApis = (option) => {
         config,
         user,
         collection,
+        feeds,
     };
 };

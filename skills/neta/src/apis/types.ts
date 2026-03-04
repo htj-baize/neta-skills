@@ -512,3 +512,11 @@ export interface ArtifactDetail {
   image_detail?: { width: number; height: number };
   video_detail?: { width: number; height: number };
 }
+
+export type ArtifactVerseListStatus =
+  | "SUCCESS"
+  | "PENDING"
+  | "STOP"
+  | "PROCESSING"
+  | "FAILED"
+  | "QUEUE";

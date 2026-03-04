@@ -96,6 +96,11 @@ pnpm start get_hashtag_characters --hashtag "标签名" --sort_by "hot"
 pnpm start get_hashtag_collections --hashtag "标签名"
 ```
 
+**获取玩法信息**
+```bash
+pnpm start read_collection --uuid "玩法-uuid"
+```
+
 ## 参考文档
 
 | 场景 | 文档 |
@@ -106,6 +111,7 @@ pnpm start get_hashtag_collections --hashtag "标签名"
 | 🎞️ MV 制作 | [song-mv.md](./references/song-mv.md) |
 | 👤 角色查询 | [character-search.md](./references/character-search.md) |
 | 🏷️ 标签调研 | [hashtag-research.md](./references/hashtag-research.md) |
+| 🌏 世界观玩法 | [collection-remix.md](./references/collection-remix.md) |
 
 ## 使用建议
 

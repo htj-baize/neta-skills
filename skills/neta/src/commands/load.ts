@@ -1,5 +1,6 @@
 import { readdir } from "node:fs/promises";
 import { resolve } from "node:path";
+import { pathToFileURL } from "node:url";
 import {
   type Command as CommanderCommand,
   Option,
@@ -28,7 +29,7 @@ export const loadCommands = async (domains: string[]) => {
 
   return await Promise.all(
     cmdFiles.map(async (file) => {
-      const module = await import(file);
+      const module = await import(pathToFileURL(file).href);
       return Object.getOwnPropertyNames(module)
         .filter((name) => {
           const value = module[name];

@@ -5,6 +5,7 @@ import { createArtifactApis } from "./artifact.ts";
 import { createAudioApis } from "./audio.ts";
 import { createCollectionApis } from "./collection.ts";
 import { createConfigApis } from "./config.ts";
+import { createFeedsApis } from "./feeds.ts";
 import { createGptApis } from "./gpt.ts";
 import {
   createHashtagApis,
@@ -50,6 +51,7 @@ export const createApis = (option: {
   const config = createConfigApis(client);
   const user = createUserApis(client);
   const collection = createCollectionApis(client);
+  const feeds = createFeedsApis(client);
 
   return {
     tcp,
@@ -64,6 +66,7 @@ export const createApis = (option: {
     config,
     user,
     collection,
+    feeds,
   };
 };
 

@@ -1,4 +1,7 @@
 import qs from "qs";
+export const isVerseCTA = (cta_info) => {
+    return "interactive_config" in cta_info;
+};
 export const createCollectionApis = (client) => {
     const createCollection = async () => {
         return client

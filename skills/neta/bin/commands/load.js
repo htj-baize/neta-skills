@@ -8,6 +8,7 @@ var __rewriteRelativeImportExtension = (this && this.__rewriteRelativeImportExte
 };
 import { readdir } from "node:fs/promises";
 import { resolve } from "node:path";
+import { pathToFileURL } from "node:url";
 import { Option, } from "@commander-js/extra-typings";
 import { createApis } from "../apis/index.js";
 import { ApiResponseError } from "../utils/errors.js";
@@ -23,7 +24,7 @@ export const loadCommands = async (domains) => {
         });
     })).then((files) => files.flat());
     return await Promise.all(cmdFiles.map(async (file) => {
-        const module = await import(__rewriteRelativeImportExtension(file));
+        const module = await import(__rewriteRelativeImportExtension(pathToFileURL(file).href));
         return Object.getOwnPropertyNames(module)
             .filter((name) => {
             const value = module[name];
