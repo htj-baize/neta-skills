@@ -17,27 +17,25 @@
 pnpm start get_hashtag_info --hashtag "标签名"
 ```
 
-## 选择主人公
-
-### 搜索世界观相关的角色
+### 看看时间观内都有哪些人
 
 ```bash
 pnpm start get_hashtag_characters --hashtag "标签名" --sort_by "hot"
 ```
 
-### 获取一个角色的详细信息
-
-```bash
-pnpm start request_character_or_elementum --uuid "角色-uuid"
-```
-
-## 浏览世界观内的玩法
+## 看看世界观内都能做些什么事情
 
 ```bash
 pnpm start get_hashtag_collections --hashtag "标签名"
 ```
 
-## 选择一个玩法并获取它的信息
+### 扮演一个世界观中的角色
+
+```bash
+pnpm start request_character_or_elementum --uuid "角色-uuid"
+```
+
+## 参与世界观中的活动或事件
 
 ```bash
 pnpm start read_collection --uuid "玩法-uuid"
