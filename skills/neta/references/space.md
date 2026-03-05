@@ -24,6 +24,7 @@
   - Collection
 
   - 子空间
+    - curated_works 核心玩法
     - Collection
 
 # 获取可供游览的空间
@@ -64,6 +65,7 @@ pnpm start list_space_topics --space_uuid "空间 UUID"
 
 - primary_topic 主空间
 - topics 子空间列表
+  - curated_works 核心玩法
 
 # 获取空间内角色
 
@@ -75,6 +77,12 @@ pnpm start get_hashtag_characters --hashtag "空间标签名" --sort_by "hot"
 
 ```bash
 pnpm start get_hashtag_collections --hashtag "标签名"
+```
+
+# 获取空间中的某个玩法信息
+
+```bash
+pnpm start read_collection --uuid "curated_works in topic | collection"
 ```
 
 ## 在空间内游玩
