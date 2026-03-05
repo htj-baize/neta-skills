@@ -27,13 +27,19 @@ pnpm i
 pnpm start list_spaces
 ```
 
+**获取空间的子空间**
+
+```bash
+pnpm list_space_topics --space_uuid "空间 uuid"
+```
+
 📖 [详细指南](./references/space.md) - 空间介绍
 
 ### 内容创作
 
 **生成图片**
 ```bash
-pnpm start make_image --prompt "提示词" --aspect "3:4"
+pnpm start make_image --prompt "@角色名，/风格元素，参考图-全图参考-图片uuid，描述词，描述词" --aspect "3:4"
 ```
 📖 [详细指南](./references/image-generation.md) - 提示词结构、宽高比选择、用例
 
@@ -81,11 +87,6 @@ pnpm start request_character_or_elementum --name "角色名"
 **通过 UUID 查询**
 ```bash
 pnpm start request_character_or_elementum --uuid "uuid"
-```
-
-**获取背景音乐**
-```bash
-pnpm start request_bgm
 ```
 
 ### 标签管理
