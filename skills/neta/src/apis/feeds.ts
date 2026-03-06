@@ -21,12 +21,22 @@ export const createFeedsApis = (client: AxiosInstance) => {
     });
   };
 
+  const interactiveItem = async (params: { collection_uuid: string }) => {
+    return client
+      .get<FeedInteractionList>("/v1/home/feed/interactive", {
+        params: {
+          collection_uuid: params.collection_uuid,
+          page_index: 0,
+          page_size: 1,
+        },
+      })
+      .then((res) => res.data.module_list[0]);
+  };
+
   const interactiveList = async (params: {
     page_size?: number;
     page_index?: number;
     biz_trace_id?: string;
-    is_new_user?: boolean;
-    select_themes?: string;
     scene?: string;
     collection_uuid?: string;
     target_collection_uuid?: string;
@@ -47,6 +57,7 @@ export const createFeedsApis = (client: AxiosInstance) => {
   return {
     homeList,
     interactiveList,
+    interactiveItem,
     tags,
   };
 };

@@ -4,6 +4,17 @@ export const createFeedsApis = (client) => {
             params,
         });
     };
+    const interactiveItem = async (params) => {
+        return client
+            .get("/v1/home/feed/interactive", {
+            params: {
+                collection_uuid: params.collection_uuid,
+                page_index: 0,
+                page_size: 1,
+            },
+        })
+            .then((res) => res.data.module_list[0]);
+    };
     const interactiveList = async (params) => {
         return client
             .get("/v1/recsys/feed/interactive", {
@@ -17,6 +28,7 @@ export const createFeedsApis = (client) => {
     return {
         homeList,
         interactiveList,
+        interactiveItem,
         tags,
     };
 };

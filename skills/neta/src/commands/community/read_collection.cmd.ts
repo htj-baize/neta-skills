@@ -22,13 +22,8 @@ export const readCollectionCmd = createCommand(
     }),
   },
   async ({ uuid }, { apis }) => {
-    const list = await apis.feeds.interactiveList({
-      page_index: 0,
-      page_size: 1,
-      collection_uuid: uuid,
-    });
+    const res = await apis.feeds.interactiveItem({ collection_uuid: uuid });
 
-    const res = list.module_list[0];
     if (!res || res.template_id !== "NORMAL") {
       throw new Error(`Collection "${uuid}" not found`);
     }
