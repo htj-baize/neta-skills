@@ -1,4 +1,4 @@
-
+# 社区个性化内容（collection, activity）推荐信息流
 **功能**
 获取社区个性化内容（collection, activity）推荐信息流，支持分页和hash筛选
 - 不传 theme 参数：个性化热门推荐
