@@ -71,11 +71,6 @@ pnpm start make_song --prompt "风格描述" --lyrics "歌词内容"
 pnpm start remove_background --input_image "image_url"
 ```
 
-**合并视频**
-```bash
-pnpm start merge_video --input "合并指令"
-```
-
 ### 角色查询
 
 **搜索角色**

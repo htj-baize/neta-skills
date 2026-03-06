@@ -44,7 +44,7 @@ npx skills add talesofai/neta-skills/skills/neta
 
 #### 可用指令总览
 
-当前技能共包含 **19 个命令**，覆盖创作、角色与社区探索等场景：
+当前技能共包含 **18 个命令**，覆盖创作、角色与社区探索等场景：
 
 | 分类 | 命令 | 说明 |
 |------|------|------|
@@ -52,7 +52,6 @@ npx skills add talesofai/neta-skills/skills/neta
 | | `make_video` | 基于图片与动作描述生成视频 |
 | | `make_song` | 基于风格与歌词生成歌曲 |
 | | `remove_background` | 移除图片背景 |
-| | `merge_video` | 合并多个视频片段 |
 | **角色 Characters** | `search_character_or_elementum` | 搜索角色与风格元素 |
 | | `request_character_or_elementum` | 通过名称或 UUID 获取角色 / 元素详情 |
 | **社区 Community** | `get_hashtag_info` | 查询标签基础信息与 worldbuilding lore |

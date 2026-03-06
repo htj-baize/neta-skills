@@ -43,7 +43,7 @@ npx skills add talesofai/neta-skills/skills/neta
 
 #### Available Commands
 
-The skill includes **19 commands** for various tasks:
+The skill includes **18 commands** for various tasks:
 
 | Category | Command | Description |
 |----------|---------|-------------|
@@ -51,7 +51,6 @@ The skill includes **19 commands** for various tasks:
 | | `make_video` | Generate videos from images and prompts |
 | | `make_song` | Compose songs with custom prompts and lyrics |
 | | `remove_background` | Remove the background from an image |
-| | `merge_video` | Merge multiple video clips into one |
 | **Characters** | `search_character_or_elementum` | Search for characters and style elements |
 | | `request_character_or_elementum` | Fetch character or elementum details by name or UUID |
 | **Community** | `get_hashtag_info` | Get details and metrics for a specific hashtag |
