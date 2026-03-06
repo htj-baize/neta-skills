@@ -114,11 +114,11 @@ pnpm start read_collection --uuid "玩法-uuid"
 
 ### 内容玩法探索
 
-**玩法内容推荐列表**
+**社区游玩&互动指南**
 ```bash
 pnpm start request_interactive_feed --page_index 0 --page_size 3
 ```
-📖 [详细指南](./references/interactive-feed.md)
+📖 [详细指南](./references/social-interactive)
 
 **社区玩法内容探索**
 ```bash
@@ -126,21 +126,22 @@ pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --
 ```
 📖 [详细指南](./references/community-exploration.md)
 
+
+
 ## 参考文档
 
-| 场景        | 文档 |
-|-----------|------|
-| 🌍 世界观    | [space.md](./references/space.md) |
-| 🎨 图片生成   | [image-generation.md](./references/image-generation.md) |
-| 🎬 视频生成   | [video-generation.md](./references/video-generation.md) |
-| 🎵 歌曲创作   | [song-creation.md](./references/song-creation.md) |
-| 🎞️ MV 制作 | [song-mv.md](./references/song-mv.md) |
-| 👤 角色查询   | [character-search.md](./references/character-search.md) |
-| 🏷️ 标签调研  | [hashtag-research.md](./references/hashtag-research.md) |
-| 🖊️ 内容创作  | [collection-remix.md](./references/collection-remix.md) |
-| 🌏 世界观玩法  | [space.md](./references/space.md) |
-| 🧭 玩法内容探索 | [community-exploration.md](./references/community-exploration.md) |
-| 🧭 玩法推荐&互动  | [community-interactive.md](./references/community-interactive.md) |
+| 场景        | 文档                                                                             |
+|-----------|--------------------------------------------------------------------------------|
+| 🌍 世界观    | [space.md](./references/space.md)                                              |
+| 🎨 图片生成   | [image-generation.md](./references/image-generation.md)                        |
+| 🎬 视频生成   | [video-generation.md](./references/video-generation.md)                        |
+| 🎵 歌曲创作   | [song-creation.md](./references/song-creation.md)                              |
+| 🎞️ MV 制作 | [song-mv.md](./references/song-mv.md)                                          |
+| 👤 角色查询   | [character-search.md](./references/character-search.md)                        |
+| 🏷️ 标签调研  | [hashtag-research.md](./references/hashtag-research.md)                        |
+| 🖊️ 内容创作  | [collection-remix.md](./references/collection-remix.md)                        |
+| 🌏 世界观玩法  | [space.md](./references/space.md)                                              |
+| 📊 社区游玩指南 | [community-playground.md](./references/community-playground.md) |    
 
 ## 使用建议
 
@@ -148,4 +149,3 @@ pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --
 2. **先调研后规划** - 使用标签调研了解热门元素和创作方向
 3. **提示词具体化** - 避免抽象描述，使用详细的要素组合
 4. **迭代测试** - 先用快速模型测试，满意后再用高质量模型
-5. **渐进式探索** - 从宽到窄逐步探索：浏览分类 → 发现标签 → 验证路径 → 获取内容

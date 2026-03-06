@@ -1,8 +1,8 @@
-# 社区互动技能最佳实践
+# 社区内容&互动玩法推荐
 
 ## 概述
 
-本指南介绍 Neta 社区互动技能的完整使用方法，涵盖内容推荐、社交互动和用户互动三大核心功能。
+本指南介绍 Neta 社区内容&互动玩法推荐技能的完整使用方法。
 
 ## 核心技能列表
 
@@ -29,16 +29,16 @@
 **典型用法：**
 
 ```bash
-# 获取首页个性化推荐
+# 获取社区首页的热门个性化推荐内容
 pnpm start request_community_feed --page_index 0 --page_size 20
 
-# 获取最新内容
+# 获取社区最新内容
 pnpm start request_community_feed --theme 最新 --page_index 0 --page_size 20
 
 # 获取关注的内容
 pnpm start request_community_feed --theme 关注 --page_index 0 --page_size 20
 
-# 获取特定标签内容
+# 获取特定标签下的内容
 pnpm start request_community_feed --theme "#游戏" --page_index 0 --page_size 20
 ```
 
@@ -91,81 +91,6 @@ pnpm start request_interactive_feed \
   --scene 'relation_feed_child' \
   --target_collection_uuid "父作品 UUID" \
   --collection_uuid "目标作品 UUID"
-```
-
-### 2. 社交互动类
-
-#### like_collection - 点赞/取消点赞作品
-
-```bash
-# 点赞作品
-pnpm start like_collection --uuid "目标作品 UUID"
-
-# 取消点赞
-pnpm start like_collection --uuid "目标作品 UUID" --is_cancel true
-```
-
-#### favor_collection - 收藏/取消收藏作品
-
-```bash
-# 收藏作品
-pnpm start favor_collection --uuid "目标作品 UUID"
-
-# 取消收藏
-pnpm start favor_collection --uuid "目标作品 UUID" --is_cancel true
-```
-
-#### create_comment - 发布评论
-
-支持对作品、评论发布评论
-
-**参数说明：**
-- `content`: 评论内容（1-500 字）
-- `parent_uuid`: 父级对象 UUID
-- `parent_type`: 父级类型（collection/comment）
-
-```bash
-# 对作品发表评论（主评论）
-pnpm start create_comment \
-  --parent_uuid "目标作品 UUID" \
-  --parent_type "collection" \
-  --content "老师，这个作品真的好棒啊！"
-
-# 对评论进行回复（楼中楼）
-pnpm start create_comment \
-  --parent_uuid "目标评论 UUID" \
-  --parent_type "comment" \
-  --content "同意楼上的观点！"
-```
-
-**注意：** `parent_type` 只支持 `collection`（作品）和 `comment`（评论），不支持角色或元素。
-
-### 3. 用户互动类
-
-#### subscribe_user - 关注/取消关注用户
-
-```bash
-# 关注用户
-pnpm start subscribe_user \
-  --user_uuid "目标用户 UUID" \
-  --is_cancel false
-
-# 取消关注
-pnpm start subscribe_user --user_uuid "目标用户 UUID" --is_cancel true
-```
-
-#### get_subscribe_list - 获取关注列表
-
-```bash
-# 获取我关注的用户列表
-pnpm start get_subscribe_list --page_index 0 --page_size 10
-```
-
-#### get_fan_list - 获取粉丝列表
-
-```bash
-# 获取我的粉丝列表
-pnpm start get_fan_list --page_index 0 --page_size 10
 ```
 
 ## 关键概念
@@ -260,76 +185,6 @@ pnpm start request_interactive_feed \
 评论时需要根据评论对象指定正确的类型：
 - `collection`: 作品（主评论）
 - `comment`: 评论（回复某条评论）
-
-## 常见使用场景
-
-### 场景 1：浏览首页推荐
-
-```bash
-# 获取个性化推荐
-pnpm start request_community_feed --page_index 0 --page_size 20
-
-# 查看更多（保持 biz_trace_id）
-pnpm start request_community_feed \
-  --page_index 1 \
-  --page_size 20 \
-  --biz_trace_id "从上一页获取"
-```
-
-### 场景 2：发现好作品并互动
-
-```bash
-# 1. 浏览推荐找到好作品
-pnpm start request_community_feed --page_index 0 --page_size 10
-
-# 2. 点赞作品
-pnpm start like_collection --uuid "作品 UUID"
-
-# 3. 收藏作品
-pnpm start favor_collection --uuid "作品 UUID"
-
-# 4. 发表评论
-pnpm start create_comment \
-  --parent_uuid "作品 UUID" \
-  --parent_type "collection" \
-  --content "太棒了！"
-```
-
-### 场景 3：查看相似作品
-
-```bash
-# 基于某个作品获取相关推荐
-pnpm start request_interactive_feed \
-  --page_index 1 \
-  --page_size 10 \
-  --collection_uuid "种子作品 UUID"
-```
-
-### 场景 4：访问用户主页
-
-```bash
-# 查看某用户的作品
-pnpm start request_interactive_feed \
-  --page_index 0 \
-  --page_size 20 \
-  --scene 'personal_feed' \
-  --target_user_uuid "用户 UUID"
-
-# 关注该用户
-pnpm start subscribe_user \
-  --user_uuid "用户 UUID" \
-  --is_cancel false
-```
-
-### 场景 5：管理社交关系
-
-```bash
-# 查看我关注的人
-pnpm start get_subscribe_list --page_index 0 --page_size 20
-
-# 查看我的粉丝
-pnpm start get_fan_list --page_index 0 --page_size 20
-```
 
 ## 性能优化建议
 
@@ -437,6 +292,5 @@ pnpm start request_community_feed --page_index 2 --biz_trace_id "$BIZ_TRACE_ID"
 3. **维护 biz_trace_id**：翻页时使用上一次返回的值，切换场景时清除
 4. **合理设置 page_size**：根据场景选择合适的大小
 5. **善用 scene 参数**：精确控制特定场景（个人主页、相关推荐等）
-6. **社交互动组合拳**：浏览 → 点赞/收藏 → 评论 → 关注
 
-通过遵循这些最佳实践，你可以更高效地使用社区互动技能，获得更好的推荐效果和用户体验。
+通过遵循这些最佳实践，你可以更高效地使用社区内容&互动玩法推荐技能，获得更好的效果和用户体验。
