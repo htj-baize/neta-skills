@@ -16,8 +16,6 @@ export const requestInteractiveFeedInputSchema = z.object({
   page_index: z.number().int().min(0).optional().default(0),
   page_size: z.number().int().min(1).max(40).optional().default(20),
   biz_trace_id: z.string().optional(),
-  is_new_user: z.boolean().optional(),
-  select_themes: z.string().optional(),
   scene: z.string().optional(),
   collection_uuid: z.string().optional(),
   target_collection_uuid: z.string().optional(),

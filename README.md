@@ -4,153 +4,185 @@
 [![Node](https://img.shields.io/badge/Node-%3E%3D20-green)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](https://www.typescriptlang.org/)
 
-**NETA Skills** is a collection of powerful AI agent skills and accompanying CLI tools designed for interacting with the [Neta Art](https://www.neta.art/) API. Built for developers and AI agents, it seamlessly extends any agent's capabilities to generate multimedia, manage characters, and process audio/video workflows.
-
-You can get your access token from [Neta Open Portal](https://www.neta.art/open/).
+[简体中文](./README.md) · [English](./README.en.md)
 
 ---
 
-## ✨ Features
+## 简体中文
 
-- 🎨 **Multimedia Creation:** Generate stunning images, videos, and songs using state-of-the-art AI models.
-- 🔧 **Image & Video Processing:** Effortlessly remove backgrounds and merge video assets.
-- 👤 **Character & Style Management:** Search, fetch details, and manage characters and stylistic elements.
-- 🏷️ **Community Integrations:** Explore trending hashtags, popular characters, and curated collections.
-- 🤖 **Agent First:** Designed from the ground up to plug into your favorite AI agent frameworks.
+### 简介
 
-## 🚀 Getting Started with Skills
+**NETA Skills** 是一组基于 [Neta Art](https://www.neta.art/) API 的 AI Agent 技能与 CLI 工具集合，帮助你在 Agent 环境中一站式完成：
 
-The primary way to use this project is by installing the skills into your AI agent environment.
+- 生成图片 / 视频 / 歌曲等多媒体内容
+- 查询与管理角色（Character）与风格元素（Elementum）
+- 进行标签（Hashtag）与空间玩法探索
+- 通过推荐引擎和互动 Feed 进行玩法内容发现
 
-### Installation
+你可以在 [Neta 开放平台](https://www.neta.art/open/) 获取访问令牌 `NETA_TOKEN`。
 
-Install the unified [`neta`](skills/neta/SKILL.md) skill into your agent:
+---
+
+### ✨ 功能特性
+
+- 🎨 **多媒体创作**：使用最新的 AI 模型生成图片、视频和歌曲。
+- 🔧 **图像与视频处理**：支持移除背景、视频合并等常见素材处理流程。
+- 👤 **角色与风格管理**：搜索、获取角色与风格元素详情，在创作中标准化复用。
+- 🏷️ **社区与标签集成**：浏览热门标签、空间、玩法合集与角色。
+- 🧭 **智能内容探索**：通过关键词建议、标签推荐、分类导航与智能内容流，渐进式发现玩法与内容。
+- 🤖 **Agent 优先设计**：面向 AI Agent 场景设计，易于在各类 Agent 框架中集成调用。
+
+---
+
+### 🚀 在 Agent 中使用技能
+
+在你的 Agent 环境中安装统一的 [`neta`](skills/neta/SKILL.md) 技能：
 
 ```bash
 npx skills add talesofai/neta-skills/skills/neta
 ```
 
-### Available Commands
+#### 可用指令总览
 
-The skill includes 13 commands for various tasks:
+当前技能共包含 **19 个命令**，覆盖创作、角色与社区探索等场景：
 
-| Category | Command | Description |
-|----------|---------|-------------|
-| **Creation** | `make_image` | Generate images from text prompts |
-| | `make_video` | Generate videos from images and prompts |
-| | `make_song` | Compose songs with custom prompts and lyrics |
-| | `remove_background` | Remove the background from an image |
-| | `merge_video` | Merge multiple video clips into one |
-| **Characters** | `search_character_or_elementum` | Search for characters and style elements |
-| | `request_character_or_elementum` | Fetch character or elementum details by name or UUID |
-| **Community** | `get_hashtag_info` | Get details and metrics for a specific hashtag |
-| | `get_hashtag_characters` | Get a list of characters under a hashtag |
-| | `get_hashtag_collections` | Get curated collections under a hashtag |
-| | `read_collection` | Read details for a specific collection (玩法) |
-| | `list_spaces` | List spaces that can be explored |
-| | `list_space_topics` | List topics available under a specific space |
+| 分类 | 命令 | 说明 |
+|------|------|------|
+| **创作 Creation** | `make_image` | 基于提示词生成图片 |
+| | `make_video` | 基于图片与动作描述生成视频 |
+| | `make_song` | 基于风格与歌词生成歌曲 |
+| | `remove_background` | 移除图片背景 |
+| | `merge_video` | 合并多个视频片段 |
+| **角色 Characters** | `search_character_or_elementum` | 搜索角色与风格元素 |
+| | `request_character_or_elementum` | 通过名称或 UUID 获取角色 / 元素详情 |
+| **社区 Community** | `get_hashtag_info` | 查询标签基础信息与 worldbuilding lore |
+| | `get_hashtag_characters` | 获取标签下的角色列表 |
+| | `get_hashtag_collections` | 获取标签下的玩法合集 |
+| | `read_collection` | 读取单个玩法合集（含 Remix 模板） |
+| | `list_spaces` | 列出可游览的空间 |
+| | `list_space_topics` | 获取空间下的子空间（topic）信息 |
+| | `request_interactive_feed` | 获取玩法互动 Feed（合集、空间、用户等场景） |
+| | `suggest_keywords` | 获取搜索关键词自动补全建议 |
+| | `suggest_tags` | 基于关键词获取相关标签建议 |
+| | `suggest_categories` | 按层级获取玩法分类导航 |
+| | `validate_tax_path` | 验证分类路径是否有效 |
+| | `suggest_content` | 推荐 / 搜索 / 精确筛选三模式内容流 |
+
+更详细的中文 CLI 示例与最佳实践，请参考 `skills/neta/SKILL.md` 以及 `skills/neta/references/` 目录下的文档。
 
 ---
 
-## 🛠️ CLI Usage
+### 🛠️ CLI 使用（本地调试与自动化）
 
-The unified skill includes a built-in CLI for testing and automation.
+统一技能内置了 CLI，方便在本地或 CI 中调试与批量调用。
 
-### Setup
+#### 安装与构建
 
 ```bash
-# 1. Clone & Install & Build
+# 1. 克隆仓库并安装依赖
 git clone https://github.com/talesofai/neta-skills.git
+cd neta-skills
 corepack enabled
 pnpm i
 pnpm -r build
 
-# 2. Configure Environment
-# Set NETA_TOKEN in your environment or create a .env file
+# 2. 配置环境变量
+# 在环境中设置 NETA_TOKEN，或在项目根目录创建 .env
 export NETA_TOKEN=your_token_here
 ```
 
-### Running Commands
+#### 运行示例
 
 ```bash
-# Get general help or specific command help
+# 查看帮助
 pnpm start:skills --help
 pnpm start:skills make_image --help
 
-# Example: Generate an image
-pnpm start:skills make_image --prompt "A cyberpunk cityscape at night" --aspect "16:9"
+# 示例：生成一张图片
+pnpm start:skills make_image \
+  --prompt "夜晚的赛博朋克城市，霓虹灯，高楼大厦，雨中街道" \
+  --aspect "16:9"
 
-# Example: Search for characters or elementum
-pnpm start:skills search_character_or_elementum --keywords "fantasy"
+# 示例：搜索角色或元素
+pnpm start:skills search_character_or_elementum \
+  --keywords "幻想" \
+  --parent_type "character"
 ```
 
 ---
 
-## 📂 Project Structure
+### 📂 项目结构
 
 ```text
 neta-skills/
 ├── skills/
-│   └── neta/                   # Unified skill with full CLI
-│       ├── SKILL.md            # Skill documentation
-│       ├── package.json        # Dependencies
+│   └── neta/                   # 统一 Neta 技能（含 CLI）
+│       ├── SKILL.md            # 技能说明与中文用法示例
+│       ├── package.json        # 子包依赖配置
 │       ├── src/
-│       │   ├── cli.ts          # CLI entry point
-│       │   ├── apis/           # API clients (activity, artifact, audio, verse, etc.)
-│       │   ├── commands/       # Command definitions (assign, community, verse)
-│       │   └── utils/          # Shared utilities
-│       ├── bin/                # Compiled JS output
-│       ├── scripts/            # Build scripts
-│       └── references/         # Best practices & workflow guides
-├── .env.example                # Environment template
-└── package.json                # Root config
+│       │   ├── cli.ts          # CLI 入口
+│       │   ├── apis/           # API Client（activity, artifact, audio, verse 等）
+│       │   ├── commands/       # 各类命令实现（assign, community, verse 等）
+│       │   └── utils/          # 通用工具
+│       ├── bin/                # 构建后的 JS 产物
+│       ├── scripts/            # 构建与发布脚本
+│       └── references/         # 最佳实践与工作流参考文档
+├── .env.example                # 环境变量示例
+└── package.json                # 根包配置
 ```
 
-## 📖 Best Practices & Workflows (References)
+---
 
-The `skills/neta/references/` directory contains detailed **best practice workflows**. These guides are designed to help AI agents (and developers) understand how to combine multiple commands to achieve complex goals effectively. 
+### 📖 最佳实践与工作流参考
 
-Agents use these references to learn the optimal sequence of actions, parameter tuning, and standard operating procedures for specific NETA Art workflows, such as:
-- **Image & Video Generation:** Best practices for chaining prompts, generating assets, and assembling videos.
-- **Song & MV Creation:** Workflows for composing songs and creating music videos with synchronized visuals.
-- **Character & Hashtag Research:** Processes for finding trending content, searching characters, and utilizing community trends.
+`skills/neta/references/` 目录下提供了详细的中文工作流与 SOP，适合 AI Agent 在规划调用顺序时阅读，例如：
 
-## 📝 Environment Variables
+- **图片与视频生成**：提示词结构、宽高比选择、从图到视频的完整链路。
+- **歌曲与 MV 创作**：歌词模板、风格设计、MV 视觉规划与多场景组合。
+- **角色与标签调研**：如何通过角色 / 标签 / 空间找到合适的创作方向。
+- **玩法内容探索**：使用 `suggest_*` 与 `suggest_content` 构建渐进式探索闭环。
 
-Both the AI agent skills and the CLI require the following environment configuration:
+---
 
-| Variable | Required | Default | Description |
-|----------|----------|---------|-------------|
-| `NETA_TOKEN` | ✅ | - | Your Neta Art API access token. |
-| `NETA_BASE_URL` | ❌ | `https://api.talesofai.cn` | Base URL for the Neta API. |
+### 📝 环境变量
 
-## 🔧 Development
+无论在 Agent 还是 CLI 中使用，都需要正确配置以下环境变量：
 
-To develop and test locally:
+| 变量名 | 必需 | 默认值 | 说明 |
+|--------|------|--------|------|
+| `NETA_TOKEN` | ✅ | - | Neta Art API 访问令牌 |
+| `NETA_BASE_URL` | ❌ | `https://api.talesofai.cn` | Neta API 网关地址 |
+
+---
+
+### 🔧 本地开发
+
+在本地开发与调试时，可以使用以下脚本：
 
 ```bash
-# Install dependencies
+# 安装依赖
 corepack enabled
 pnpm i
 
-# Run TypeScript type checking
+# TypeScript 类型检查
 pnpm -r type-check
 
-# Run lint
+# 代码检查（lint）
 pnpm lint
 
-# Test CLI commands locally
+# 本地调试技能（watch / dev）
 pnpm dev:skills <command> [options]
 
-# Build bin scripts
+# 构建 bin 脚本
 pnpm -r build
 ```
 
-## 📄 License
+---
 
-This project is open-sourced under the [MIT License](LICENSE).
+### 📄 开源协议与链接
 
-## 🔗 Links
+本项目基于 [MIT License](LICENSE) 开源。
 
-- [Neta Art Official Website](https://www.neta.art/)
-- [skills.sh Documentation](https://skills.sh/docs)
+- [Neta Art 官网](https://www.neta.art/)
+- [skills.sh 文档](https://skills.sh/docs)
+
