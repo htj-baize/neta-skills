@@ -35,12 +35,32 @@ export const createCollectionApis = (client) => {
     };
     const likeCollection = async (storyId, options) => {
         const { is_cancel } = options ?? {};
-        return client
-            .put("/v1/story/story-like", {
-            storyId,
-            is_cancel: is_cancel ?? false,
-        })
-            .then((res) => res.data.status === "SUCCESS");
+        const response = await client.request({
+            method: "PUT",
+            url: "/v1/story/story-like",
+            data: {
+                storyId,
+                is_cancel: is_cancel ?? false,
+            },
+        });
+        // API 可能返回 null 或者空对象，只要没有抛出错误就认为成功
+        return response.status === 200 || response.status === 204;
+    };
+    const createComment = async (params) => {
+        const response = await client.request({
+            method: "POST",
+            url: "/v1/comment/comment",
+            data: {
+                content: params.content,
+                parent_uuid: params.parent_uuid,
+                parent_type: params.parent_type,
+                at_users: params.at_users ?? [],
+            },
+        });
+        return {
+            success: response.status === 200 || response.status === 201,
+            comment: response.data,
+        };
     };
     return {
         createCollection,
@@ -48,5 +68,6 @@ export const createCollectionApis = (client) => {
         publishCollection,
         collectionDetails,
         likeCollection,
+        createComment,
     };
 };
