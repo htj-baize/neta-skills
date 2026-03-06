@@ -47,8 +47,13 @@ pnpm start favor_collection \
 
 ```bash
 pnpm start create_comment \
-    --parent_uuid "b7a64aa7-3e72-40ea-9f54-9b5bdc1863f1" \
+    --parent_uuid "collection-uuid" \
     --parent_type "collection" \
+    --content "老师，这个作品真的好棒啊！"
+
+pnpm start create_comment \
+    --parent_uuid "comment-uuid" \
+    --parent_type "comment" \
     --content "老师，这个作品真的好棒啊！"
 ```
 
@@ -68,12 +73,14 @@ pnpm start subscribe_user \
 ```
 
 ### 获取关注作者列表
-```json
-
+```bash
+pnpm start get_subscribe_list --page_index 0 --page_size 10
 ```
 
 ### 获取粉丝列表
-
+```bash
+pnpm start get_fan_list --page_index 0 --page_size 10
+```
 
 
 
