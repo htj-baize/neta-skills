@@ -70,7 +70,7 @@ pnpm start request_interactive_feed \
   --page_size 10 \
   --collection_uuid "种子作品 UUID"
 
-# 查看用户个人主页
+# 查看用户个人主页作品列表（按照发布时间倒序）
 pnpm start request_interactive_feed \
   --page_index 0 \
   --page_size 20 \
@@ -162,6 +162,7 @@ HOME_BIZ_TRACE=$(cat /tmp/home.json | jq -r '.page_data.biz_trace_id')
 # 场景 2：查看个人主页（错误：继续使用了首页的 biz_trace_id）
 pnpm start request_interactive_feed \
   --page_index 0 \
+  --scene 'personal_feed' \
   --target_user_uuid "user-uuid" \
   --biz_trace_id "$HOME_BIZ_TRACE"  # ❌ 不应该传递！
 ```
