@@ -47,7 +47,6 @@ export const getSubscribeListCmd = createCommand(
           subscribe_status: z.string().nullable(),
         }),
       ),
-      has_next: z.boolean().nullable(),
     }),
   },
   async ({ page_index, page_size }, { apis, log }) => {
@@ -74,7 +73,6 @@ export const getSubscribeListCmd = createCommand(
         total_collections: user.total_collections,
         subscribe_status: user.subscribe_status,
       })),
-      has_next: result.has_next,
     };
   },
 );

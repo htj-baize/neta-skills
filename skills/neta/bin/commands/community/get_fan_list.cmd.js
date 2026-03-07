@@ -38,8 +38,7 @@ export const getFanListCmd = createCommand({
             total_fans: z.number().nullable(),
             total_collections: z.number().nullable(),
             subscribe_status: z.string().nullable(),
-        })),
-        has_next: z.boolean().nullable(),
+        }))
     }),
 }, async ({ page_index, page_size }, { apis, log }) => {
     log.debug("get_fan_list: page_index: %s, page_size: %s", page_index, page_size);
@@ -58,7 +57,6 @@ export const getFanListCmd = createCommand({
             total_fans: user.total_fans,
             total_collections: user.total_collections,
             subscribe_status: user.subscribe_status,
-        })),
-        has_next: result.has_next,
+        }))
     };
 });
