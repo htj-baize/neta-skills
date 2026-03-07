@@ -22,6 +22,8 @@ pnpm start request_community_feed \
 # 1. 浏览推荐找到好作品
 pnpm start request_community_feed --page_index 0 --page_size 10
 
+# 1.1. 获取作品详情
+pnpm start read_collection --uuid "作品 UUID"
 # 2. 点赞作品
 pnpm start like_collection --uuid "作品 UUID"
 
@@ -43,6 +45,9 @@ pnpm start request_interactive_feed \
   --page_index 1 \
   --page_size 10 \
   --collection_uuid "种子作品 UUID"
+  
+# 获取作品详情
+pnpm start read_collection --uuid "作品 UUID"
 ```
 
 ### 场景 4：访问用户主页
