@@ -125,10 +125,12 @@ pnpm start request_interactive_feed --page_index 0 --page_size 3
 pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --intent exact --tax_paths "衍生创作类>同人二创"
 ```
 📖 [详细指南](./references/community-exploration.md)
-**社交互动**
+**社区互动**
 ```bash
-
+pnpm start like_collection --uuid "目标作品 UUID"
 ```
+📖 [详细指南](./references/social-interactive.md)
+
 
 ## 参考文档
 
