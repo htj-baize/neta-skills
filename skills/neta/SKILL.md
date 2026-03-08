@@ -125,6 +125,10 @@ pnpm start request_interactive_feed --page_index 0 --page_size 3
 pnpm start suggest_content --page_index 0 --page_size 20 --scene agent_intent --intent exact --tax_paths "衍生创作类>同人二创"
 ```
 📖 [详细指南](./references/community-exploration.md)
+**社交互动**
+```bash
+
+```
 
 ## 参考文档
 
