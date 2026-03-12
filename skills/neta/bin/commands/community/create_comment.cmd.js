@@ -11,18 +11,10 @@ export const createCommentCmd = createCommand({
     title: meta.title,
     description: meta.description,
     inputSchema: z.object({
-        content: z
-            .string()
-            .min(1)
-            .max(500),
-        parent_uuid: z
-            .string(),
-        parent_type: z
-            .enum(["collection"]),
-        at_users: z
-            .string()
-            .optional()
-            .default("")
+        content: z.string().min(1).max(500),
+        parent_uuid: z.string(),
+        parent_type: z.enum(["collection"]),
+        at_users: z.string().optional().default(""),
     }),
     outputSchema: z.object({
         success: z.boolean(),

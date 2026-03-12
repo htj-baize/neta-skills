@@ -12,10 +12,7 @@ export const favorCollectionCmd = createCommand({
     description: meta.description,
     inputSchema: z.object({
         uuid: z.string(),
-        is_cancel: z
-            .boolean()
-            .optional()
-            .default(false),
+        is_cancel: z.boolean().optional().default(false),
     }),
     outputSchema: z.object({
         success: z.boolean(),

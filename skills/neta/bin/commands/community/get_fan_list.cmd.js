@@ -11,19 +11,8 @@ export const getFanListCmd = createCommand({
     title: meta.title,
     description: meta.description,
     inputSchema: z.object({
-        page_index: z
-            .number()
-            .int()
-            .min(0)
-            .optional()
-            .default(0),
-        page_size: z
-            .number()
-            .int()
-            .min(1)
-            .max(50)
-            .optional()
-            .default(20)
+        page_index: z.number().int().min(0).optional().default(0),
+        page_size: z.number().int().min(1).max(50).optional().default(20),
     }),
     outputSchema: z.object({
         total: z.number(),
