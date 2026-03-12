@@ -17,16 +17,12 @@ export const subscribeUserCmd = createCommand(
     title: meta.title,
     description: meta.description,
     inputSchema: z.object({
-      user_uuid: z.string().describe("用户 UUID"),
-      is_cancel: z
-        .boolean()
-        .optional()
-        .default(false)
-        .describe("是否取消关注，true 为取消关注，false 为关注"),
+      user_uuid: z.string(),
+      is_cancel: z.boolean().optional().default(false),
     }),
     outputSchema: z.object({
       success: z.boolean(),
-      subscribe_status: z.string().nullable().optional().describe("关注状态"),
+      subscribe_status: z.string().nullable().optional(),
       message: z.string(),
     }),
   },
@@ -37,8 +33,7 @@ export const subscribeUserCmd = createCommand(
       is_cancel ? "true" : "false",
     );
 
-    const action = is_cancel ? "取消关注" : "关注";
-    log.info(`subscribe_user: ${action}用户：%s`, user_uuid);
+    const action = is_cancel ? "unsubscribe" : "subscribe";
 
     const result = await apis.user.subscribeUser({
       user_uuid,
@@ -46,13 +41,13 @@ export const subscribeUserCmd = createCommand(
     });
 
     if (!result.success) {
-      throw new Error(`${action}失败`);
+      throw new Error(`${action} fail`);
     }
 
     return {
       success: true,
       subscribe_status: result.subscribe_status,
-      message: `${action}成功`,
+      message: `${action} success`,
     };
   },
 );

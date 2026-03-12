@@ -17,12 +17,8 @@ export const favorCollectionCmd = createCommand(
     title: meta.title,
     description: meta.description,
     inputSchema: z.object({
-      uuid: z.string().describe("作品 UUID"),
-      is_cancel: z
-        .boolean()
-        .optional()
-        .default(false)
-        .describe("是否取消收藏，true 为取消收藏，false 为收藏"),
+      uuid: z.string(),
+      is_cancel: z.boolean().optional().default(false),
     }),
     outputSchema: z.object({
       success: z.boolean(),
@@ -36,18 +32,17 @@ export const favorCollectionCmd = createCommand(
       is_cancel ? "true" : "false",
     );
 
-    const action = is_cancel ? "取消收藏" : "收藏";
-    log.info(`favor_collection: ${action}作品：%s`, uuid);
+    const action = is_cancel ? "cancel_favor" : "favor";
 
     const result = await apis.collection.favorCollection(uuid, { is_cancel });
 
     if (!result.success) {
-      throw new Error(`${action}失败`);
+      throw new Error(`${action} fail`);
     }
 
     return {
       success: true,
-      message: `${action}成功`,
+      message: `${action} success`,
     };
   },
 );
