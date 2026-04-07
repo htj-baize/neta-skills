@@ -10,24 +10,24 @@ export type HomeCollectionTag = {
 };
 
 export const createFeedsApis = (client: AxiosInstance) => {
-  const homeList = (params: {
+  const homeList = async (params: {
     page_size?: number;
     page_index?: number;
     theme?: string;
     biz_trace_id?: string;
   }) => {
-    return client.get<FeedMainList>("/v1/home/feed/mainlist", {
-      params,
-    });
+    return client
+      .get<FeedMainList>("/v1/home/feed/mainlist", {
+        params,
+      })
+      .then((res) => res.data);
   };
 
   const interactiveItem = async (params: { collection_uuid: string }) => {
     return client
-      .get<FeedInteractionList>("/v1/home/feed/interactive", {
+      .get<FeedInteractionList>("v1/recsys/interactive/details", {
         params: {
-          collection_uuid: params.collection_uuid,
-          page_index: 0,
-          page_size: 1,
+          uuid: params.collection_uuid,
         },
       })
       .then((res) => res.data.module_list[0]);

@@ -28,9 +28,12 @@ export const createPromptApis = (
     const insPrompts = stringToPrompts(prompt, options);
     const refImages = insPrompts.filter((p) => p.type === "ref_image");
 
-    const artifacts = await artifactApis
-      .artifactDetail(refImages.map((p) => p.ref_img_uuid ?? ""))
-      .catch(() => []);
+    const artifacts =
+      refImages.length > 0
+        ? await artifactApis
+            .artifactDetail(refImages.map((p) => p.ref_img_uuid ?? ""))
+            .catch(() => [])
+        : [];
 
     artifacts.forEach((artifact) => {
       if (!artifact) return;

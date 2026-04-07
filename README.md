@@ -63,7 +63,7 @@ npx skills add talesofai/neta-skills/skills/neta-elementum
 
 ### Available Commands
 
-The skill includes **30 commands** for various tasks:
+The skill includes **33 commands** for various tasks:
 
 | Category | Command | Description |
 |----------|---------|-------------|
@@ -84,6 +84,7 @@ The skill includes **30 commands** for various tasks:
 | **Community** | `get_hashtag_info` | Get details and lore for a specific hashtag |
 | | `get_hashtag_characters` | Get a list of characters under a hashtag |
 | | `get_hashtag_collections` | Get curated collections under a hashtag |
+| | `request_community_feed` | Get the home content feed with `关注` / `热门` / `最新` themes |
 | | `read_collection` | Read details for a specific collection (玩法) |
 | | `list_spaces` | List spaces that can be explored |
 | | `list_space_topics` | List topics available under a specific space |
@@ -260,4 +261,3 @@ This project is open-sourced under the [MIT License](LICENSE).
 
 - [Neta Art Official Website](https://www.neta.art/)
 - [skills.sh Documentation](https://skills.sh/docs)
-

@@ -36,6 +36,22 @@ pnpm add -g @talesofai/neta-skills@latest
 
 ## Commands
 
+### Home feed
+
+**Get the home content feed**
+
+```bash
+neta-cli request_community_feed --theme 热门 --page_index 0 --page_size 10
+neta-cli request_community_feed --theme 最新 --page_index 0 --page_size 10
+neta-cli request_community_feed --theme 关注 --page_index 0 --page_size 10
+```
+
+Theme mapping:
+
+- `关注` = followed works feed
+- `热门` = hot recommendation feed
+- `最新` = latest works feed
+
 ### Collection
 
 **Get collection details**
@@ -111,4 +127,3 @@ neta-cli request_character_or_elementum --uuid "uuid"
 1. **Browse before interacting**: use the feed first to understand the overall content landscape, then interact (like, etc.) with the works that matter.
 2. **Leverage tags**: combining tag queries with character searches quickly focuses on the most relevant set of works.
 3. **Combine with research/creation skills**: use `neta-suggest` for deeper tag/category research, and `neta-creative` when you want to create derivative works based on community content.
-

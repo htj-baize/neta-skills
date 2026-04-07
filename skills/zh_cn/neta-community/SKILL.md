@@ -37,6 +37,19 @@ pnpm add -g @talesofai/neta-skills@latest
 
 ### 内容推荐流
 
+**首页内容推荐列表**
+```bash
+neta-cli request_community_feed --theme 热门 --page_index 0 --page_size 10
+neta-cli request_community_feed --theme 最新 --page_index 0 --page_size 10
+neta-cli request_community_feed --theme 关注 --page_index 0 --page_size 10
+```
+
+其中：
+
+- `关注` = 关注作品列表
+- `热门` = 热门推荐列表
+- `最新` = 最新作品列表
+
 **推荐流获取**
 ```bash
 neta-cli request_interactive_feed --page_index 0 --page_size 3

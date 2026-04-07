@@ -65,7 +65,7 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-elementum
 
 ### 可用指令总览
 
-当前技能共包含 **30 个命令**，覆盖创作、角色与社区探索等场景：
+当前技能共包含 **33 个命令**，覆盖创作、角色与社区探索等场景：
 
 | 分类 | 命令 | 说明 |
 |------|------|------|
@@ -86,6 +86,7 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-elementum
 | **社区 Community** | `get_hashtag_info` | 查询标签基础信息与 worldbuilding lore |
 | | `get_hashtag_characters` | 获取标签下的角色列表 |
 | | `get_hashtag_collections` | 获取标签下的玩法合集 |
+| | `request_community_feed` | 获取首页内容推荐列表（`关注` / `热门` / `最新`） |
 | | `read_collection` | 读取单个玩法合集（含 Remix 模板） |
 | | `list_spaces` | 列出可游览的空间 |
 | | `list_space_topics` | 获取空间下的子空间（topic）信息 |
@@ -263,4 +264,3 @@ pnpm build
 
 - [Neta Art 官网](https://www.neta.art/)
 - [skills.sh 文档](https://skills.sh/docs)
-
