@@ -1,0 +1,3 @@
+name: request_community_feed
+title: Get Home Community Feed
+description: Retrieve the home content feed with `关注`, `热门`, or `最新` themes, which map to followed works, hot recommendations, and latest works respectively.
