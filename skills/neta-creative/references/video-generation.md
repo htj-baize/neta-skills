@@ -2,6 +2,8 @@
 
 Applies to the `make_video` command.
 
+**User-uploaded stills:** `make_video --image_source` expects an **image URL** string. After **`upload`**, use the artifact’s **`url`** field from the command output (not the bare UUID). See [Media upload](./media-upload.md).
+
 ---
 
 ## Prompt principles
@@ -117,7 +119,7 @@ She blinks gently.
 ### Animated character illustration
 
 ```bash
-neta-cli make_video \
+npx -y @talesofai/neta-skills@latest make_video \
   --image_source "https://example.com/character.jpg" \
   --prompt "The character breathes softly, hair moving in the wind, warm smile, eyes blinking gently." \
   --model "model_s"
@@ -126,7 +128,7 @@ neta-cli make_video \
 ### Animated wallpaper
 
 ```bash
-neta-cli make_video \
+npx -y @talesofai/neta-skills@latest make_video \
   --image_source "https://example.com/scenery.jpg" \
   --prompt "The starry sky slowly rotates, shooting stars pass by, dreamy glowing particles, calm and peaceful." \
   --model "model_w"
@@ -135,7 +137,7 @@ neta-cli make_video \
 ### Cover animation
 
 ```bash
-neta-cli make_video \
+npx -y @talesofai/neta-skills@latest make_video \
   --image_source "https://example.com/cover.jpg" \
   --prompt "Title text glows softly, background particles drift, cinematic feel." \
   --model "model_s"
@@ -145,14 +147,14 @@ neta-cli make_video \
 
 ```bash
 # 1. Generate an image (16:9 works well for video)
-neta-cli make_image \
+npx -y @talesofai/neta-skills@latest make_image \
   --prompt "Dreamy starry sky background, shooting stars, deep blue tone." \
   --aspect "16:9"
 
 # 2. Retrieve the image URL from the output
 
 # 3. Generate video
-neta-cli make_video \
+npx -y @talesofai/neta-skills@latest make_video \
   --image_source "<IMAGE_URL>" \
   --prompt "The starry sky slowly rotates, shooting stars pass by." \
   --model "model_w"
@@ -238,5 +240,6 @@ She slowly blinks, the corners of her mouth lifting slightly, strands of hair sw
 ## Related docs
 
 - [Image generation](./image-generation.md) — generating still images for video conversion.
+- [Media upload](./media-upload.md) — using local stills as `image_source`.
 - [Song MV](./song-mv.md) — combining songs and videos to build full music videos.
 

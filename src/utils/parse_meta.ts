@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import type { TSchema } from "@sinclair/typebox";
 import { Value } from "@sinclair/typebox/value";
 import yaml from "yaml";
-import { getLocale as getLocaleFromLang } from "./lang.ts";
+import { getSysLocale as getLocaleFromLang } from "./lang.ts";
 
 let _locale: "zh_cn" | "en_us" = "en_us";
 
@@ -24,5 +24,5 @@ export const parseMeta = <T extends TSchema>(
   );
 
   const data = yaml.parse(file);
-  return Value.Decode(schema, data);
+  return Value.Parse(schema, data);
 };

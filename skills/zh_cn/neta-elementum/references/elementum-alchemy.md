@@ -50,12 +50,12 @@
 
 ```bash
 # 全景展示
-neta-cli make_image \
+npx -y @talesofai/neta-skills@latest make_image \
   --prompt "生化危机4风格欧洲中世纪村庄，破旧石屋，燃烧篝火，浓雾弥漫，枯木，恐怖压抑氛围，写实风格，无人" \
   --aspect "16:9"
 
 # 氛围特写
-neta-cli make_image \
+npx -y @talesofai/neta-skills@latest make_image \
   --prompt "破旧石屋墙面，苔藓，火把，浓雾，近景，写实风格" \
   --aspect "3:4"
 ```
@@ -64,7 +64,7 @@ neta-cli make_image \
 
 ```bash
 # 物品展示（白背景，清晰展示细节）
-neta-cli make_image \
+npx -y @talesofai/neta-skills@latest make_image \
   --prompt "古老皮质魔法书，金色封印符文，略微破旧，白色背景，游戏道具图标风格" \
   --aspect "1:1"
 ```
@@ -73,7 +73,7 @@ neta-cli make_image \
 
 ```bash
 # 风格测试（用通用场景验证风格）
-neta-cli make_image \
+npx -y @talesofai/neta-skills@latest make_image \
   --prompt "水墨风格，山水，竹林，留白，中国传统绘画美学，极简" \
   --aspect "3:4"
 ```
@@ -82,7 +82,7 @@ neta-cli make_image \
 
 ```bash
 # 姿势展示（配合角色）
-neta-cli make_image \
+npx -y @talesofai/neta-skills@latest make_image \
   --prompt "女性角色，战斗站姿，双手握剑，侧身，动感构图，白色背景，全身像" \
   --aspect "3:4"
 ```
@@ -91,7 +91,7 @@ neta-cli make_image \
 
 ```bash
 # 梗图复现
-neta-cli make_image \
+npx -y @talesofai/neta-skills@latest make_image \
   --prompt "动漫风格女性，微微皱眉，手指向右侧，'这就是命运' 表情，轻松幽默" \
   --aspect "1:1"
 ```
@@ -174,7 +174,7 @@ description：此元素表示生化危机4标志性的废弃欧洲村庄场景�
 确认后执行：
 
 ```bash
-neta-cli create_elementum \
+npx -y @talesofai/neta-skills@latest create_elementum \
   --name "RE4村庄" \
   --artifact_uuid "代表图的artifacts[0].uuid" \
   --prompt "生化危机4风格欧洲中世纪村庄，破旧石屋，燃烧篝火，浓雾弥漫，枯木，恐怖压抑氛围，写实风格" \
@@ -187,7 +187,7 @@ neta-cli create_elementum \
 创建成功后，API 返回 `tcp_uuid`。告知用户：
 - 元素 UUID（tcp_uuid），用于后续更新
 - 如何在 make_image 中引用：`/RE4村庄`
-- 示例用法：`neta-cli make_image --prompt "@Ada Wong, /RE4村庄, 夜晚，战斗姿态" --aspect "3:4"`
+- 示例用法：`npx -y @talesofai/neta-skills@latest make_image --prompt "@Ada Wong, /RE4村庄, 夜晚，战斗姿态" --aspect "3:4"`
 
 ---
 

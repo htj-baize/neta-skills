@@ -1,5 +1,131 @@
 # @neta/skills-neta
 
+## 0.17.0
+
+### Minor Changes
+
+- Add authenticated user commands: `me` (profile/identity check), `get_ap_info` (AP balance breakdown), `get_ap_history` (cursor-paginated AP transactions), and `list_my_artifacts` (offset-paginated generated media with modality/starred filters)
+- API layer: add `apInfo()`, `apDeltaInfo()` to user APIs; add `listArtifacts()` to artifact APIs
+- Documentation: add "Credits & your artifacts" section to neta-creative SKILL.md (EN/ZH); add reference docs `ap-credits.md` and `my-artifacts.md` (EN/ZH)
+
+## 0.16.7
+
+### Patch Changes
+
+- update config dir path
+
+## 0.16.6
+
+### Patch Changes
+
+- update read_collection commands api
+- add user check for all commands exclude "login"
+- move inline error text to utils/errors.ts file
+- remove authorization from SKILL.md, add login usage to not authorization error and login -h command
+
+## 0.16.5
+
+### Patch Changes
+
+- update auth api base url
+
+## 0.16.4
+
+### Patch Changes
+
+- fix build
+
+## 0.16.3
+
+### Patch Changes
+
+- update auth api resource
+
+## 0.16.2
+
+### Patch Changes
+
+- fix auth api endpoint
+
+## 0.16.1
+
+### Patch Changes
+
+- fix some env problems
+
+## 0.16.0
+
+### Minor Changes
+
+- support oauth2 device flow with login command
+
+## 0.15.3
+
+### Patch Changes
+
+- fix logger
+
+## 0.15.2
+
+### Patch Changes
+
+- fix debug log in production environment
+
+## 0.15.1
+
+### Patch Changes
+
+- support network media url for media assets upload
+
+## 0.15.0
+
+### Minor Changes
+
+- support media assets upload
+
+## 0.14.3
+
+### Patch Changes
+
+- fix api logger env problem
+
+## 0.14.2
+
+### Patch Changes
+
+- usage analytics
+
+## 0.14.1
+
+### Patch Changes
+
+- - Add api logs for debug.
+  - Add api timeout with 10000ms.
+
+  - Fixed error info about remove_background input_image param in docs.
+
+## 0.14.0
+
+### Minor Changes
+
+- 54180c1: feat(premium): implement premium subscription commands and integrate dayjs for date handling
+
+  - Add premium subscription CLI commands: `create_premium_order`, `pay_premium_order`, `get_current_premium_plan`, `get_premium_order`, `list_premium_orders`, `list_premium_plans`; wire commerce APIs and command loading.
+  - Add `dayjs` and `src/utils/date.ts` for date formatting/parsing; adjust `parse_meta` as needed.
+  - Update `README.md` and `skills/neta-creative/SKILL.md`; add `skills/neta-creative/references/premium.md` for premium workflows.
+
+## 0.13.0
+
+### Minor Changes
+
+- rename all "travel" keywords in docs、commands to "adventure"
+
+## 0.12.0
+
+### Minor Changes
+
+- 0a03853: introduce neta-travel skill for creating and playing AI-driven interactive story adventures (travel campaigns)
+
 ## 0.11.0
 
 ### Minor Changes

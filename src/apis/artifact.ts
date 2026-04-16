@@ -11,6 +11,22 @@ import type {
   TaskMeta,
 } from "./types.ts";
 
+export interface ArtifactItem {
+  uuid: string;
+  status: string | null;
+  url: string | null;
+  modality: string | null;
+  is_starred: boolean | null;
+  ctime: string | null;
+  mtime: string | null;
+  audio_name: string | null;
+}
+
+export interface ArtifactListResponse {
+  total: number;
+  list: ArtifactItem[];
+}
+
 export const createArtifactApis = (client: AxiosInstance) => {
   const makeImage = async (
     payload: MakeImageRequest,
@@ -110,6 +126,43 @@ export const createArtifactApis = (client: AxiosInstance) => {
       .then((res) => res.data);
   };
 
+  const createPicture = (data: { url: string }) => {
+    return client
+      .post<{
+        uuid: string;
+      }>(`/v1/artifact/picture`, {
+        url: data.url,
+      })
+      .then((res) => res.data);
+  };
+
+  const createVideo = (data: { url: string }) => {
+    return client
+      .post<{
+        uuid: string;
+      }>(`/v1/artifact/video`, {
+        url: data.url,
+      })
+      .then((res) => res.data);
+  };
+
+  const listArtifacts = async (params?: {
+    page_index?: number;
+    page_size?: number;
+    modality?: string;
+    is_starred?: boolean;
+  }): Promise<ArtifactListResponse> => {
+    const res = await client.get<ArtifactListResponse>("/v1/artifact/list", {
+      params: {
+        page_index: params?.page_index ?? 0,
+        page_size: params?.page_size ?? 20,
+        modality: params?.modality,
+        is_starred: params?.is_starred,
+      },
+    });
+    return res.data;
+  };
+
   return {
     makeImage,
     makeVideo,
@@ -119,5 +172,8 @@ export const createArtifactApis = (client: AxiosInstance) => {
     postProcess,
     task,
     artifactDetail,
+    createPicture,
+    createVideo,
+    listArtifacts,
   };
 };

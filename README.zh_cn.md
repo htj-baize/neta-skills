@@ -1,10 +1,10 @@
 # NETA Skills
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node](https://img.shields.io/badge/Node-%3E%3D20-green)](https://nodejs.org/)
+[![Node](https://img.shields.io/badge/Node-%3E%3D22-green)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)](https://www.typescriptlang.org/)
 
-[简体中文](./README.md) · [English](./README.en.md)
+[简体中文](./README.zh_cn.md) · [English](./README.md)
 
 ---
 
@@ -16,20 +16,22 @@
 - 查询与管理角色（Character）与风格元素（Elementum）
 - 进行标签（Hashtag）与空间玩法探索
 - 通过推荐引擎和互动 Feed 进行玩法内容发现
+- 创作与游玩 AI 驱动的交互式故事冒险（奇遇剧本），Agent 担任 DM 与角色扮演者
 
-你可以在 [Neta 开放平台](https://www.neta.art/open/) 获取访问令牌 `NETA_TOKEN`。
-也可以在[国内登陆账号后台](https://app.nieta.art/security) 获取访问令牌 `NETA_TOKEN`。
+你可以在 [Neta 开放平台](https://www.neta.art/open/) 或[国内账号后台](https://app.nieta.art/security) 获取访问令牌 `NETA_TOKEN`。在**全球** API 环境下，也可使用 CLI 的 `login`（OAuth 设备流）登录，详见下文「身份验证」小节。
 
 ---
 
 ## ✨ 功能特性
 
 - 🎨 **多媒体创作**：使用最新的 AI 模型生成图片、视频和歌曲。
+- ⭐ **会员与订阅**：列出套餐、创建订单、发起 Stripe 结账，并通过 CLI 校验当前档位（全球 API 环境）。
 - 🔧 **图像与视频处理**：支持移除背景、视频合并等常见素材处理流程。
 - 👤 **角色与风格管理**：搜索、获取角色与风格元素详情，在创作中标准化复用。
 - 🏷️ **社区与标签集成**：浏览热门标签、空间、玩法合集与角色。
 - 🧭 **智能内容探索**：通过关键词建议、标签推荐、分类导航与智能内容流，渐进式发现玩法与内容。
 - 🤖 **Agent 优先设计**：面向 AI Agent 场景设计，易于在各类 Agent 框架中集成调用。
+- 🔐 **CLI 登录（可选）**：在**全球** API 环境（`api.talesofai.com`）下，可通过 `login` 使用 OAuth **设备授权**登录，无需在每台环境手动配置 `NETA_TOKEN`。
 
 ---
 
@@ -61,14 +63,24 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-character
 
 # 元素 VToken 创建与管理
 npx skills add talesofai/neta-skills/skills/zh_cn/neta-elementum
+
+# AI 驱动的交互式故事冒险（奇遇剧本）
+npx skills add talesofai/neta-skills/skills/zh_cn/neta-adventure
 ```
 
 ### 可用指令总览
 
-当前技能共包含 **33 个命令**，覆盖创作、角色与社区探索等场景：
+当前技能共包含 **52 个命令**，覆盖创作、角色与社区探索等场景：
 
 | 分类 | 命令 | 说明 |
 |------|------|------|
+| **用户 User** | `login` | OAuth 设备流：默认 `request-code` 发起登录；浏览器完成后用 `verify-code` 换票并写入本地会话 |
+| | `logout` | 清除本地保存的访问令牌及未完成的设备授权状态 |
+| | `me` | 查看当前登录用户的资料、AP 汇总与作品统计 |
+| **奇遇剧本 Adventure** | `create_adventure_campaign` | 创建 AI 驱动的交互式故事冒险剧本 |
+| | `update_adventure_campaign` | 更新已有奇遇剧本 |
+| | `list_my_adventure_campaigns` | 列出你创建的奇遇剧本 |
+| | `request_adventure_campaign` | 加载完整剧本详情（游玩模式） |
 | **创作 Creation** | `make_image` | 基于提示词生成图片 |
 | | `make_video` | 基于图片与动作描述生成视频 |
 | | `make_song` | 基于风格与歌词生成歌曲 |
@@ -76,6 +88,16 @@ npx skills add talesofai/neta-skills/skills/zh_cn/neta-elementum
 | | `edit_collection` | 编辑已有玩法合集（名称、描述、标签、状态等） |
 | | `publish_collection` | 发布或更新玩法合集内容 |
 | | `search_character_or_elementum` | 搜索可复用的 TCP（角色 / 元素 / 玩法模块） |
+| | `get_ap_info` | 查询 AP（电量）余额明细（临时 / 付费 / 无限期等） |
+| | `get_ap_history` | 分页查询 AP 消耗与充值流水（游标分页） |
+| | `list_my_artifacts` | 分页列出你生成的媒体产物，可按类型 / 是否收藏筛选 |
+| | `upload` | 上传本地或远程媒体文件以创建媒体产物 |
+| **会员 Premium** | `get_current_premium_plan` | 查询当前用户档位与订阅到期时间（如适用） |
+| | `list_premium_plans` | 列出可购套餐与 SPU UUID |
+| | `create_premium_order` | 按 SPU 创建订单 |
+| | `get_premium_order` | 查询单笔订单详情 |
+| | `list_premium_orders` | 分页列出订单 |
+| | `pay_premium_order` | 为未支付订单发起支付（如 Stripe Checkout） |
 | **VToken 管理** | `create_character` | 创建角色 VToken（消耗电量） |
 | | `update_character` | 更新现有角色 VToken |
 | | `list_my_characters` | 列出当前用户创建的所有角色 |
@@ -129,20 +151,44 @@ pnpm dlx @talesofai/neta-skills --help
 export NETA_TOKEN=your_token_here
 ```
 
+### 身份验证（`NETA_TOKEN` 与 `login`）
+
+任选其一即可：
+
+1. **环境变量令牌（通用）**  
+   在 [Neta 开放平台](https://www.neta.art/open/) 或国内后台获取 `NETA_TOKEN`。未建立 CLI 会话时，客户端会将其作为 `x-token` 发送。
+
+2. **CLI 设备授权登录（仅全球 API）**  
+   当 `NETA_API_BASE_URL` 为全球域名（`…talesofai.com`）时，可执行：
+
+   ```bash
+   npx -y @talesofai/neta-skills@latest login
+   ```
+
+   命令会返回 OAuth 设备授权字段。请让用户在浏览器中打开 **`verification_uri_complete`** 完成登录与授权，完成后执行：
+
+   ```bash
+   npx -y @talesofai/neta-skills@latest login --action verify-code
+   ```
+
+   成功后令牌保存在本机配置目录（见下文 `NETA_CONFIG_DIR`）。之后在会话有效期内，请求会携带 `Authorization: Bearer …`，直至执行 `logout` 或刷新失效。
+
+若 CLI 提示**当前区域不支持**设备登录（非全球 API），请改用 `NETA_TOKEN`。
+
 ### 运行示例
 
 ```bash
 # 查看帮助
-neta-cli --help
-neta-cli make_image --help
+npx -y @talesofai/neta-skills@latest --help
+npx -y @talesofai/neta-skills@latest make_image --help
 
 # 示例：生成一张图片
-neta-cli make_image \
+npx -y @talesofai/neta-skills@latest make_image \
   --prompt "夜晚的赛博朋克城市，霓虹灯，高楼大厦，雨中街道" \
   --aspect "16:9"
 
 # 示例：搜索角色或元素
-neta-cli search_character_or_elementum \
+npx -y @talesofai/neta-skills@latest search_character_or_elementum \
   --keywords "幻想" \
   --parent_type "character"
 ```
@@ -162,6 +208,7 @@ neta-skills/
 │   ├── neta-space/                 # 英文空间与话题导航 / 探索技能
 │   ├── neta-character/             # 英文角色 VToken 创建与管理技能
 │   ├── neta-elementum/             # 英文元素 VToken 创建与管理技能
+│   ├── neta-adventure/                # 英文交互式故事冒险（奇遇剧本）技能
 │   └── zh_cn/                      # 中文本地化技能与参考文档
 │       ├── neta/
 │       ├── neta-community/
@@ -169,10 +216,11 @@ neta-skills/
 │       ├── neta-suggest/
 │       ├── neta-space/
 │       ├── neta-character/
-│       └── neta-elementum/
+│       ├── neta-elementum/
+│       └── neta-adventure/
 ├── src/                            # CLI 对应的 TypeScript 源码
 │   ├── apis/                       # 封装后的 Neta API 调用
-│   ├── commands/                   # CLI 命令定义（TS + YAML 描述）
+│   ├── commands/                   # CLI 命令定义（含 user / creative / community 等）
 │   ├── utils/                      # 通用工具方法
 │   └── cli.ts                      # CLI 入口（TypeScript）
 ├── bin/                            # 构建后的 JavaScript 产物
@@ -201,6 +249,7 @@ neta-skills/
 - **角色与标签调研**：如何通过角色 / 标签 / 空间找到合适的创作方向。
 - **角色与元素创建**：角色创建和元素炼金的工作流。
 - **玩法内容探索**：使用 `suggest_*` 与 `suggest_content` 构建渐进式探索闭环。
+- **奇遇剧本创作与游玩**：多轮协作故事创作工作流（创作模式）、交互式会话管理（游玩模式）、字段手册，以及含历史穿越、末世生存、武侠江湖的完整类型范例。见 `skills/zh_cn/neta-adventure/references/`。
 
 ---
 
@@ -210,8 +259,20 @@ neta-skills/
 
 | 变量名 | 必需 | 默认值 | 说明 |
 |--------|------|--------|------|
-| `NETA_TOKEN` | ✅ | - | Neta Art API 访问令牌 |
-| `NETA_API_BASE_URL` | ❌ | default: `https://api.talesofai.com` | Neta API 网关地址 |
+| `NETA_TOKEN` | 视情况* | - | 从开放平台或国内后台获取的 API 令牌；未使用 `login` 会话时必填 |
+| `NETA_API_BASE_URL` | ❌ | `https://api.talesofai.com` | Neta API 网关；设备登录仅在指向**全球**域名（`…talesofai.com`）时可用 |
+| `NETA_AUTH_API_BASE_URL` | ❌ | 由 `NETA_API_BASE_URL` 推导 | OIDC / 换票端点；自建环境可显式覆盖 |
+| `NETA_CLIENT_ID` | ❌ | 内置公共客户端 ID | 设备流与刷新令牌使用的 OAuth `client_id` |
+| `NETA_CONFIG_DIR` | ❌ | 系统配置目录 | CLI 存放 OAuth 令牌与设备流状态的目录（`env-paths` + `neta-cli`） |
+| `DISABLE_TELEMETRY` | ❌ | 未设置 | 设为 `1` 可关闭 CLI 使用数据统计（见下文） |
+
+\* 若你已在**全球** API 上成功执行 `login` / `verify-code`，在会话有效期间可不设 `NETA_TOKEN`，直至 `logout` 或刷新会话失效。
+
+### CLI 使用数据（埋点 / 遥测）
+
+`@talesofai/neta-skills` CLI 会上报轻量使用数据（例如执行的命令、命令行参数、CLI 版本与语言、大致 API 区域、执行结果与耗时、登录时的用户 UUID 等；**不包含** API Token），用于衡量稳定性并改进产品体验。
+
+若不希望参与统计，请在环境中设置 `DISABLE_TELEMETRY=1`，此时不会发起相关上报请求。
 
 ### 多语言与本地化（i18n）
 
@@ -228,8 +289,8 @@ CLI 与 Skills 会根据系统与环境变量自动选择使用的语言：
 在需要强制指定语言时，推荐在运行命令前显式设置环境变量，例如：
 
 ```bash
-LC_ALL=zh_CN.UTF-8 neta-cli make_image --help
-LANG=en_US.UTF-8 neta-cli make_image --help
+LC_ALL=zh_CN.UTF-8 npx -y @talesofai/neta-skills@latest make_image --help
+LANG=en_US.UTF-8 npx -y @talesofai/neta-skills@latest make_image --help
 ```
 
 ---
@@ -249,8 +310,11 @@ pnpm type-check
 # 代码检查（lint）
 pnpm lint
 
-# 本地调试技能（watch / dev）
-pnpm dev <command> [options]
+# 本地调试（无额外参数时）
+pnpm dev -- <command>
+
+# 带子命令参数时，pnpm 可能在 argv 中插入 `--`，可直接调用入口，例如：
+# NODE_ENV=development node src/cli.ts get_ap_history --page_size 5
 
 # 构建 bin 脚本
 pnpm build

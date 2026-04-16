@@ -12,22 +12,6 @@ description: Neta API 内容调研与推荐技能——提供关键词/标签/�
 3. 在内容创作前，可使用本 skill 先完成题材/标签/分类层面的调研，再交给 `neta-creative` 进行具体创作。
 4. 当用户需要对具体作品进行点赞/互动时，应切换到 `neta-community`。
 
-## 前置条件
-
-确保已安装最新版本的 Neta Cli
-```
-neta-cli --version
-0.11.0
-```
-
-```
-npm i @talesofai/neta-skills@latest -g
-```
-
-```
-pnpm add -g @talesofai/neta-skills@latest
-```
-
 ## 核心技能
 
 ### 1. suggest_keywords - 获取搜索关键词建议
@@ -35,7 +19,7 @@ pnpm add -g @talesofai/neta-skills@latest
 基于输入前缀提供热门搜索词建议，帮助用户发现感兴趣的内容方向。
 
 ```bash
-neta-cli suggest_keywords --prefix "游戏" --size 20
+npx -y @talesofai/neta-skills@latest suggest_keywords --prefix "游戏" --size 20
 ```
 
 **参数说明：**
@@ -52,7 +36,7 @@ neta-cli suggest_keywords --prefix "游戏" --size 20
 基于完整关键词推荐相关的 tax 标签。
 
 ```bash
-neta-cli suggest_tags --keyword "角色塑造" --size 15
+npx -y @talesofai/neta-skills@latest suggest_tags --keyword "角色塑造" --size 15
 ```
 
 **参数说明：**
@@ -70,13 +54,13 @@ neta-cli suggest_tags --keyword "角色塑造" --size 15
 
 ```bash
 # 获取一级分类（顶层分类）
-neta-cli suggest_categories --level 1
+npx -y @talesofai/neta-skills@latest suggest_categories --level 1
 
 # 获取二级分类（需要父级路径）
-neta-cli suggest_categories --level 2 --parent_path "衍生创作类"
+npx -y @talesofai/neta-skills@latest suggest_categories --level 2 --parent_path "衍生创作类"
 
 # 获取三级分类（最细粒度）
-neta-cli suggest_categories --level 3 --parent_path "衍生创作类>同人二创"
+npx -y @talesofai/neta-skills@latest suggest_categories --level 3 --parent_path "衍生创作类>同人二创"
 ```
 
 **参数说明：**
@@ -105,7 +89,7 @@ neta-cli suggest_categories --level 3 --parent_path "衍生创作类>同人二�
 检查分类路径是否有效，避免使用不存在的分类。
 
 ```bash
-neta-cli validate_tax_path --tax_path "衍生创作类>热门 IP>崩坏星穹铁道"
+npx -y @talesofai/neta-skills@latest validate_tax_path --tax_path "衍生创作类>热门 IP>崩坏星穹铁道"
 ```
 
 **参数说明：**
@@ -121,14 +105,14 @@ neta-cli validate_tax_path --tax_path "衍生创作类>热门 IP>崩坏星穹铁
 
 ```bash
 # 模式 1：推荐模式（广泛探索）
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --page_index 0 \
   --page_size 20 \
   --scene agent_intent \
   --intent recommend
 
 # 模式 2：搜索模式（关键词搜索）
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --page_index 0 \
   --page_size 20 \
   --scene agent_intent \
@@ -136,7 +120,7 @@ neta-cli suggest_content \
   --search_keywords "角色,创意"
 
 # 模式 3：精确模式（分类筛选）
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --page_index 0 \
   --page_size 20 \
   --scene agent_intent \
@@ -144,7 +128,7 @@ neta-cli suggest_content \
   --tax_paths "衍生创作类>同人二创"
 
 # 组合使用（多条件筛选）
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --page_index 0 \
   --page_size 20 \
   --scene agent_intent \
@@ -185,11 +169,11 @@ graph LR
 
 ```bash
 # 查看所有一级分类
-neta-cli suggest_categories --level 1
+npx -y @talesofai/neta-skills@latest suggest_categories --level 1
 # 输出示例：["衍生创作类", "数字艺术", "生活方式"]
 
 # 对感兴趣的分类深入查看
-neta-cli suggest_categories --level 2 --parent_path "衍生创作类"
+npx -y @talesofai/neta-skills@latest suggest_categories --level 2 --parent_path "衍生创作类"
 # 输出示例：["同人二创", "原创故事", "互动小说"]
 ```
 
@@ -199,11 +183,11 @@ neta-cli suggest_categories --level 2 --parent_path "衍生创作类"
 
 ```bash
 # 基于关键词找标签
-neta-cli suggest_tags --keyword "同人二创" --size 15
+npx -y @talesofai/neta-skills@latest suggest_tags --keyword "同人二创" --size 15
 # 输出示例：["崩坏星穹铁道", "原神", "明日方舟"]
 
 # 或者用关键词建议辅助
-neta-cli suggest_keywords --prefix "崩" --size 10
+npx -y @talesofai/neta-skills@latest suggest_keywords --prefix "崩" --size 10
 # 输出示例：["崩坏星穹铁道", "崩坏 3", "崩坏学园"]
 ```
 
@@ -212,7 +196,7 @@ neta-cli suggest_keywords --prefix "崩" --size 10
 在正式使用前验证路径有效性：
 
 ```bash
-neta-cli validate_tax_path \
+npx -y @talesofai/neta-skills@latest validate_tax_path \
   --tax_path "衍生创作类>同人二创>崩坏星穹铁道"
 # 如果有效会返回成功，否则提示错误
 ```
@@ -223,13 +207,13 @@ neta-cli validate_tax_path \
 
 ```bash
 # 精确模式：按分类筛选
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent exact \
   --tax_paths "衍生创作类>同人二创>崩坏星穹铁道" \
   --page_size 20
 
 # 或者搜索模式：结合关键词
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent search \
   --search_keywords "崩坏星穹铁道，同人" \
   --tax_paths "衍生创作类>同人二创" \
@@ -244,7 +228,7 @@ neta-cli suggest_content \
 
 ```bash
 # 策略：使用推荐模式，广泛浏览
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent recommend \
   --page_size 20
 ```
@@ -260,13 +244,13 @@ neta-cli suggest_content \
 
 ```bash
 # 步骤 1：先用关键词建议发现方向
-neta-cli suggest_keywords --prefix "游" --size 15
+npx -y @talesofai/neta-skills@latest suggest_keywords --prefix "游" --size 15
 
 # 步骤 2：基于发现的关键词找标签
-neta-cli suggest_tags --keyword "游戏" --size 15
+npx -y @talesofai/neta-skills@latest suggest_tags --keyword "游戏" --size 15
 
 # 步骤 3：使用搜索模式探索
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent search \
   --search_keywords "原神" \
   --page_size 20
@@ -283,15 +267,15 @@ neta-cli suggest_content \
 
 ```bash
 # 步骤 1：确认分类路径
-neta-cli suggest_categories --level 1
-neta-cli suggest_categories --level 2 --parent_path "衍生创作类"
+npx -y @talesofai/neta-skills@latest suggest_categories --level 1
+npx -y @talesofai/neta-skills@latest suggest_categories --level 2 --parent_path "衍生创作类"
 
 # 步骤 2：验证路径
-neta-cli validate_tax_path \
+npx -y @talesofai/neta-skills@latest validate_tax_path \
   --tax_path "衍生创作类>同人二创>崩坏星穹铁道"
 
 # 步骤 3：精确筛选
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent exact \
   --tax_paths "衍生创作类>同人二创>崩坏星穹铁道" \
   --page_size 20
@@ -308,13 +292,13 @@ neta-cli suggest_content \
 
 ```bash
 # 步骤 1：了解热门标签
-neta-cli suggest_tags --keyword "角色塑造" --size 20
+npx -y @talesofai/neta-skills@latest suggest_tags --keyword "角色塑造" --size 20
 
 # 步骤 2：了解相关分类
-neta-cli suggest_categories --level 2 --parent_path "衍生创作类"
+npx -y @talesofai/neta-skills@latest suggest_categories --level 2 --parent_path "衍生创作类"
 
 # 步骤 3：查看该分类下的热门内容
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent search \
   --search_keywords "角色,设定" \
   --tax_paths "衍生创作类>同人二创" \
@@ -331,7 +315,7 @@ neta-cli suggest_content \
 想看某类内容，但想排除某些元素。
 
 ```bash
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent search \
   --search_keywords "AI,绘画" \
   --tax_paths "数字艺术" \
@@ -350,7 +334,7 @@ neta-cli suggest_content \
 ### 组合 1：关键词 + 分类双重筛选
 
 ```bash
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent search \
   --search_keywords "视频,剪辑" \
   --tax_paths "数字艺术>视频制作" \
@@ -362,7 +346,7 @@ neta-cli suggest_content \
 ### 组合 2：多级分类组合
 
 ```bash
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent exact \
   --tax_paths "衍生创作类>同人二创>崩坏星穹铁道" \
   --page_size 20
@@ -373,7 +357,7 @@ neta-cli suggest_content \
 ### 组合 3：推荐模式 + 排除条件
 
 ```bash
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent recommend \
   --exclude_keywords "教程,搬运" \
   --exclude_tax_paths "课程类" \
@@ -386,7 +370,7 @@ neta-cli suggest_content \
 
 ```bash
 # 第 1 页
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --page_index 0 \
   --page_size 20 \
   --intent search \
@@ -395,7 +379,7 @@ neta-cli suggest_content \
 # 保存返回的 biz_trace_id（假设返回值为 "abc123"）
 
 # 第 2 页（使用第 1 页返回的 biz_trace_id）
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --page_index 1 \
   --page_size 20 \
   --intent search \
@@ -474,7 +458,7 @@ neta-cli suggest_content \
 
 ```bash
 # 第一次请求
-neta-cli suggest_categories --level 1 > /tmp/categories_level1.json
+npx -y @talesofai/neta-skills@latest suggest_categories --level 1 > /tmp/categories_level1.json
 
 # 后续使用缓存（示例：从缓存文件读取）
 cat /tmp/categories_level1.json
@@ -488,12 +472,12 @@ cat /tmp/categories_level1.json
 
 ```bash
 # 获取 Level 1 分类
-neta-cli suggest_categories --level 1
+npx -y @talesofai/neta-skills@latest suggest_categories --level 1
 
 # 并行预加载 Level 2 分类（示例：使用后台任务）
-neta-cli suggest_categories --level 2 --parent_path "衍生创作类" &
-neta-cli suggest_categories --level 2 --parent_path "数字艺术" &
-neta-cli suggest_categories --level 2 --parent_path "生活方式" &
+npx -y @talesofai/neta-skills@latest suggest_categories --level 2 --parent_path "衍生创作类" &
+npx -y @talesofai/neta-skills@latest suggest_categories --level 2 --parent_path "数字艺术" &
+npx -y @talesofai/neta-skills@latest suggest_categories --level 2 --parent_path "生活方式" &
 wait
 ```
 
@@ -505,9 +489,9 @@ wait
 
 ```bash
 # 并行验证多个路径
-neta-cli validate_tax_path --tax_path "衍生创作类>同人二创>崩坏星穹铁道" &
-neta-cli validate_tax_path --tax_path "衍生创作类>同人二创>原神" &
-neta-cli validate_tax_path --tax_path "数字艺术>概念设计" &
+npx -y @talesofai/neta-skills@latest validate_tax_path --tax_path "衍生创作类>同人二创>崩坏星穹铁道" &
+npx -y @talesofai/neta-skills@latest validate_tax_path --tax_path "衍生创作类>同人二创>原神" &
+npx -y @talesofai/neta-skills@latest validate_tax_path --tax_path "数字艺术>概念设计" &
 wait
 
 # 或者使用脚本批量处理
@@ -518,7 +502,7 @@ cat > /tmp/paths.txt << EOF
 EOF
 
 while read path; do
-  neta-cli validate_tax_path --tax_path "$path"
+  npx -y @talesofai/neta-skills@latest validate_tax_path --tax_path "$path"
 done < /tmp/paths.txt
 ```
 
@@ -530,7 +514,7 @@ done < /tmp/paths.txt
 
 ```bash
 # 开启 debug 日志
-DEBUG=* neta-cli suggest_content \
+DEBUG=* npx -y @talesofai/neta-skills@latest suggest_content \
   --intent search \
   --search_keywords "测试关键词"
 ```
@@ -541,7 +525,7 @@ DEBUG=* neta-cli suggest_content \
 
 ```bash
 # 先用 exact 模式测试
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent exact \
   --tax_paths "你的分类路径" \
   --page_size 5
@@ -556,9 +540,9 @@ neta-cli suggest_content \
 
 ```bash
 # 同一关键词，对比三种模式
-neta-cli suggest_content --intent recommend --page_size 10
-neta-cli suggest_content --intent search --search_keywords "关键词" --page_size 10
-neta-cli suggest_content --intent exact --tax_paths "分类路径" --page_size 10
+npx -y @talesofai/neta-skills@latest suggest_content --intent recommend --page_size 10
+npx -y @talesofai/neta-skills@latest suggest_content --intent search --search_keywords "关键词" --page_size 10
+npx -y @talesofai/neta-skills@latest suggest_content --intent exact --tax_paths "分类路径" --page_size 10
 ```
 
 观察不同模式下结果的差异，理解各模式的特点。
@@ -573,10 +557,10 @@ neta-cli suggest_content --intent exact --tax_paths "分类路径" --page_size 1
 
 ```bash
 # keywords - 前缀匹配
-neta-cli suggest_keywords --prefix "崩"  # 返回所有以"崩"开头的词
+npx -y @talesofai/neta-skills@latest suggest_keywords --prefix "崩"  # 返回所有以"崩"开头的词
 
 # tags - 相关性匹配
-neta-cli suggest_tags --keyword "游戏"   # 返回与"游戏"相关的标签
+npx -y @talesofai/neta-skills@latest suggest_tags --keyword "游戏"   # 返回与"游戏"相关的标签
 ```
 
 ### Q2: 为什么 validate_tax_path 验证通过，但 suggest_content 返回空？
@@ -589,7 +573,7 @@ neta-cli suggest_tags --keyword "游戏"   # 返回与"游戏"相关的标签
 **解决方案：**
 ```bash
 # 尝试去掉其他条件，只用分类路径
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --intent exact \
   --tax_paths "你的分类路径" \
   --page_size 10
@@ -609,12 +593,12 @@ neta-cli suggest_content \
 
 ```bash
 # 排除包含特定词的内容
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --exclude_keywords "教程,广告,搬运" \
   --search_keywords "绘画"
 
 # 排除特定分类
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --exclude_tax_paths "课程培训,商业推广" \
   --tax_paths "数字艺术"
 ```
@@ -627,7 +611,7 @@ neta-cli suggest_content \
 
 ```
 # 第 1 次请求（首页）
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --page_index 0 \
   --page_size 20 \
   --intent search \
@@ -637,7 +621,7 @@ neta-cli suggest_content \
 BIZ_TRACE_ID=$(cat /tmp/page0.json | jq -r '.page_data.biz_trace_id')
 
 # 第 2 次请求（下一页），使用保存的 biz_trace_id
-neta-cli suggest_content \
+npx -y @talesofai/neta-skills@latest suggest_content \
   --page_index 1 \
   --page_size 20 \
   --intent search \

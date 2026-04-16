@@ -14,7 +14,7 @@
 你需要使用 `read_collection` 指令获取参考信息进行 Remix（二创）、复现或改编，以满足用户需求
 
 ```bash
-neta-cli read_collection --uuid "作品-uuid"
+npx -y @talesofai/neta-skills@latest read_collection --uuid "作品-uuid"
 ```
 
 **返回内容**
@@ -31,10 +31,14 @@ neta-cli read_collection --uuid "作品-uuid"
 
 ## 开始创作
 
-适用 `make_image` `make_video` `make_song` 命令
+适用 `make_image` `make_video` `make_song` 命令。
+
+若用户提供的**图片或视频在本地**、不在合集返回的素材列表中，请先 **`upload`**，再在 `make_image` 中使用 **`参考图-<uuid>`** / **`ref_img-<uuid>`**，或在 `make_video` 中使用素材的 **`url`**。详见 [媒体上传](./media-upload.md)。
 
 📖 - [生成图片](./image-generation.md)
 
 📖 - [生成视频](./video-generation.md)
 
 📖 - [生成歌曲](./song-creation.md)
+
+📖 - [媒体上传](./media-upload.md)
