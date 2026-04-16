@@ -49,6 +49,9 @@ npx -y @talesofai/neta-skills@latest read_collection --uuid "collection-uuid"
 
 ```bash
 npx -y @talesofai/neta-skills@latest like_collection --uuid "target collection UUID"
+npx -y @talesofai/neta-skills@latest get_liked_list --cursor_id 0 --page_size 10
+npx -y @talesofai/neta-skills@latest favor_collection --uuid "target collection UUID"
+npx -y @talesofai/neta-skills@latest get_favor_list --cursor_id 0 --page_size 10
 ```
 
 📖 [Detailed guide](./references/social-interactive.md)

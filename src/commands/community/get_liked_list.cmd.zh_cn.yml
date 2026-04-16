@@ -1,0 +1,3 @@
+name: get_liked_list
+title: 获取点赞作品列表
+description: 获取当前用户点赞过的作品列表，支持游标分页

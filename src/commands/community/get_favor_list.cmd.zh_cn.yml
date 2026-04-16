@@ -1,0 +1,3 @@
+name: get_favor_list
+title: 获取收藏作品列表
+description: 获取当前用户收藏过的作品列表，支持游标分页

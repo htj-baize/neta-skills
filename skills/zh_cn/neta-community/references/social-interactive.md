@@ -22,6 +22,22 @@ npx -y @talesofai/neta-skills@latest favor_collection --uuid "目标作品 UUID"
 npx -y @talesofai/neta-skills@latest favor_collection --uuid "目标作品 UUID" --is_cancel true
 ```
 
+#### get_liked_list - 查看我点赞过的作品
+
+```bash
+npx -y @talesofai/neta-skills@latest get_liked_list --cursor_id 0 --page_size 10
+```
+
+翻页时使用上一页返回的 `next_cursor` 继续请求。
+
+#### get_favor_list - 查看我收藏过的作品
+
+```bash
+npx -y @talesofai/neta-skills@latest get_favor_list --cursor_id 0 --page_size 10
+```
+
+翻页时使用上一页返回的 `next_cursor` 继续请求。
+
 #### create_comment - 发布评论
 
 支持对作品、评论发布评论
@@ -70,4 +86,3 @@ npx -y @talesofai/neta-skills@latest get_subscribe_list --page_index 0 --page_si
 ```bash
 npx -y @talesofai/neta-skills@latest get_fan_list --page_index 0 --page_size 10
 ```
-

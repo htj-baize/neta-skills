@@ -1,0 +1,3 @@
+name: get_liked_list
+title: Get Liked Collections
+description: Retrieve the current user's liked collections with cursor pagination.

@@ -450,6 +450,13 @@ export interface HomeStatusQueueItem {
   running_status: ArtifactVerseListStatus;
 }
 
+export interface CursorCollectionListResponse {
+  items: unknown[];
+  has_next: boolean;
+  next_cursor: number | null;
+  biz_trace_id?: string | null;
+}
+
 export const isVerseCTA = (
   cta_info: CTAInfo,
 ): cta_info is NormalCTAInfo | Exp1CTAInfo | Exp2CTAInfo | Exp3CTAInfo => {
@@ -566,6 +573,38 @@ export const createCollectionApis = (client: AxiosInstance) => {
     };
   };
 
+  const getLikedList = async (params?: {
+    cursor_id?: number;
+    page_size?: number;
+  }): Promise<CursorCollectionListResponse> => {
+    const response = await client.request({
+      method: "GET",
+      url: "/v2/story/liked-list-cursor",
+      params: {
+        cursor_id: params?.cursor_id ?? 0,
+        page_size: params?.page_size ?? 20,
+      },
+    });
+
+    return response.data as CursorCollectionListResponse;
+  };
+
+  const getFavorList = async (params?: {
+    cursor_id?: number;
+    page_size?: number;
+  }): Promise<CursorCollectionListResponse> => {
+    const response = await client.request({
+      method: "GET",
+      url: "/v2/story/favor-list-cursor",
+      params: {
+        cursor_id: params?.cursor_id ?? 0,
+        page_size: params?.page_size ?? 20,
+      },
+    });
+
+    return response.data as CursorCollectionListResponse;
+  };
+
   return {
     createCollection,
     saveCollection,
@@ -574,5 +613,7 @@ export const createCollectionApis = (client: AxiosInstance) => {
     likeCollection,
     createComment,
     favorCollection,
+    getLikedList,
+    getFavorList,
   };
 };

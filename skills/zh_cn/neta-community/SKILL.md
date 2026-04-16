@@ -49,6 +49,9 @@ npx -y @talesofai/neta-skills@latest read_collection --uuid "作品-uuid"
 ### 社区互动
 ```bash
 npx -y @talesofai/neta-skills@latest like_collection --uuid "目标作品 UUID"
+npx -y @talesofai/neta-skills@latest get_liked_list --cursor_id 0 --page_size 10
+npx -y @talesofai/neta-skills@latest favor_collection --uuid "目标作品 UUID"
+npx -y @talesofai/neta-skills@latest get_favor_list --cursor_id 0 --page_size 10
 ```
 📖 [详细指南](./references/social-interactive.md)
 

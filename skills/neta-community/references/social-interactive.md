@@ -22,6 +22,22 @@ npx -y @talesofai/neta-skills@latest favor_collection --uuid "TARGET_COLLECTION_
 npx -y @talesofai/neta-skills@latest favor_collection --uuid "TARGET_COLLECTION_UUID" --is_cancel true
 ```
 
+#### `get_liked_list` — view collections I liked
+
+```bash
+npx -y @talesofai/neta-skills@latest get_liked_list --cursor_id 0 --page_size 10
+```
+
+Use `next_cursor` from the previous response to continue pagination.
+
+#### `get_favor_list` — view collections I favorited
+
+```bash
+npx -y @talesofai/neta-skills@latest get_favor_list --cursor_id 0 --page_size 10
+```
+
+Use `next_cursor` from the previous response to continue pagination.
+
 #### `create_comment` — post a comment
 
 Supports commenting on collections and on other comments (threaded replies).
@@ -71,4 +87,3 @@ npx -y @talesofai/neta-skills@latest get_subscribe_list --page_index 0 --page_si
 ```bash
 npx -y @talesofai/neta-skills@latest get_fan_list --page_index 0 --page_size 10
 ```
-
