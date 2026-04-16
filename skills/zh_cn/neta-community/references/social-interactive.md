@@ -1,6 +1,6 @@
 ## 社交互动技能
 
-### 1. 社区互动
+### 1. 作品互动操作
 
 #### like_collection - 点赞/取消点赞作品
 
@@ -21,22 +21,6 @@ npx -y @talesofai/neta-skills@latest favor_collection --uuid "目标作品 UUID"
 # 取消收藏
 npx -y @talesofai/neta-skills@latest favor_collection --uuid "目标作品 UUID" --is_cancel true
 ```
-
-#### get_liked_list - 查看我点赞过的作品
-
-```bash
-npx -y @talesofai/neta-skills@latest get_liked_list --cursor_id 0 --page_size 10
-```
-
-翻页时使用上一页返回的 `next_cursor` 继续请求。
-
-#### get_favor_list - 查看我收藏过的作品
-
-```bash
-npx -y @talesofai/neta-skills@latest get_favor_list --cursor_id 0 --page_size 10
-```
-
-翻页时使用上一页返回的 `next_cursor` 继续请求。
 
 #### create_comment - 发布评论
 
@@ -63,7 +47,25 @@ npx -y @talesofai/neta-skills@latest create_comment \
 
 **注意：** `parent_type` 只支持 `collection`（作品）和 `comment`（评论），不支持角色或元素。
 
-### 2. 用户互动
+### 2. 作品互动记录查询
+
+#### get_liked_list - 查看我点赞过的作品
+
+```bash
+npx -y @talesofai/neta-skills@latest get_liked_list --cursor_id 0 --page_size 10
+```
+
+翻页时使用上一页返回的 `next_cursor` 继续请求。
+
+#### get_favor_list - 查看我收藏过的作品
+
+```bash
+npx -y @talesofai/neta-skills@latest get_favor_list --cursor_id 0 --page_size 10
+```
+
+翻页时使用上一页返回的 `next_cursor` 继续请求。
+
+### 3. 用户关系互动
 
 #### subscribe_user - 关注/取消关注用户
 

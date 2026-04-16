@@ -1,6 +1,6 @@
 ## Social Interaction Skills
 
-### 1. Community interactions
+### 1. Collection interaction actions
 
 #### `like_collection` — like/unlike a collection
 
@@ -21,22 +21,6 @@ npx -y @talesofai/neta-skills@latest favor_collection --uuid "TARGET_COLLECTION_
 # Remove from favorites
 npx -y @talesofai/neta-skills@latest favor_collection --uuid "TARGET_COLLECTION_UUID" --is_cancel true
 ```
-
-#### `get_liked_list` — view collections I liked
-
-```bash
-npx -y @talesofai/neta-skills@latest get_liked_list --cursor_id 0 --page_size 10
-```
-
-Use `next_cursor` from the previous response to continue pagination.
-
-#### `get_favor_list` — view collections I favorited
-
-```bash
-npx -y @talesofai/neta-skills@latest get_favor_list --cursor_id 0 --page_size 10
-```
-
-Use `next_cursor` from the previous response to continue pagination.
 
 #### `create_comment` — post a comment
 
@@ -64,7 +48,25 @@ npx -y @talesofai/neta-skills@latest create_comment \
 
 **Note:** `parent_type` only supports `collection` (works) and `comment` (comments). It does **not** support characters or elementums.
 
-### 2. User interactions
+### 2. Collection interaction history
+
+#### `get_liked_list` — view collections I liked
+
+```bash
+npx -y @talesofai/neta-skills@latest get_liked_list --cursor_id 0 --page_size 10
+```
+
+Use `next_cursor` from the previous response to continue pagination.
+
+#### `get_favor_list` — view collections I favorited
+
+```bash
+npx -y @talesofai/neta-skills@latest get_favor_list --cursor_id 0 --page_size 10
+```
+
+Use `next_cursor` from the previous response to continue pagination.
+
+### 3. User relationship interactions
 
 #### `subscribe_user` — follow/unfollow a user
 
